@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{C13B29E3-104B-425A-B951-47F155CFDEC4}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Quest.Web", "App\Web\Quest.Web.xproj", "{E2FE2853-1B45-4D8A-BB0A-F31178C45611}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{688A6121-B0E2-4FC9-A3A1-4AB269EAE0B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{E0FCA76E-CF50-4773-927F-2A0A7404BDA2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{923C79DD-6909-47BF-9ECC-3B7A885E75C2}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Quest.Domain", "Core\Domain\Quest.Domain.xproj", "{243773B5-5CCC-4221-AA61-90A8B32FDE79}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Quest.Azure.DocumentDb", "Infrastructure\Azure.DocumentDb\Quest.Azure.DocumentDb.xproj", "{AD8B29DC-1F06-478E-A339-E1F29BDD3202}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Quest.Common", "Shared\Common\Quest.Common.xproj", "{9B144B50-4B20-49BC-9E62-84CF06B5CA2C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{468CF001-47E5-48B3-9734-27825D11B804}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Quest.Services", "Core\Services\Quest.Services.xproj", "{5FFCC050-FAB7-4B3C-BF58-ACF1A6B76B9F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2FE2853-1B45-4D8A-BB0A-F31178C45611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2FE2853-1B45-4D8A-BB0A-F31178C45611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2FE2853-1B45-4D8A-BB0A-F31178C45611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2FE2853-1B45-4D8A-BB0A-F31178C45611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{243773B5-5CCC-4221-AA61-90A8B32FDE79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{243773B5-5CCC-4221-AA61-90A8B32FDE79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{243773B5-5CCC-4221-AA61-90A8B32FDE79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{243773B5-5CCC-4221-AA61-90A8B32FDE79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD8B29DC-1F06-478E-A339-E1F29BDD3202}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD8B29DC-1F06-478E-A339-E1F29BDD3202}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD8B29DC-1F06-478E-A339-E1F29BDD3202}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD8B29DC-1F06-478E-A339-E1F29BDD3202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B144B50-4B20-49BC-9E62-84CF06B5CA2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B144B50-4B20-49BC-9E62-84CF06B5CA2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B144B50-4B20-49BC-9E62-84CF06B5CA2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B144B50-4B20-49BC-9E62-84CF06B5CA2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FFCC050-FAB7-4B3C-BF58-ACF1A6B76B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FFCC050-FAB7-4B3C-BF58-ACF1A6B76B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FFCC050-FAB7-4B3C-BF58-ACF1A6B76B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FFCC050-FAB7-4B3C-BF58-ACF1A6B76B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E2FE2853-1B45-4D8A-BB0A-F31178C45611} = {C13B29E3-104B-425A-B951-47F155CFDEC4}
+		{243773B5-5CCC-4221-AA61-90A8B32FDE79} = {688A6121-B0E2-4FC9-A3A1-4AB269EAE0B8}
+		{AD8B29DC-1F06-478E-A339-E1F29BDD3202} = {E0FCA76E-CF50-4773-927F-2A0A7404BDA2}
+		{9B144B50-4B20-49BC-9E62-84CF06B5CA2C} = {923C79DD-6909-47BF-9ECC-3B7A885E75C2}
+		{5FFCC050-FAB7-4B3C-BF58-ACF1A6B76B9F} = {688A6121-B0E2-4FC9-A3A1-4AB269EAE0B8}
+	EndGlobalSection
+EndGlobal
