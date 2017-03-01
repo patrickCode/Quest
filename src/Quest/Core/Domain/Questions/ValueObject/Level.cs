@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Domain.Questions.ValueObject
+﻿namespace Domain.Questions.ValueObject
 {
     public class Level
     {
@@ -14,7 +9,7 @@ namespace Domain.Questions.ValueObject
 
         public int Index { get; private set; }
         public string DisplayName { get; private set; }
-        public Level(int index, string display)
+        private Level(int index, string display)
         {
             Index = index;
             DisplayName = display;
