@@ -3,6 +3,7 @@ using System.Linq;
 using Common.Domain;
 using System.Collections.Generic;
 using Domain.Questions.ValueObject;
+using Common.Exceptions;
 
 namespace Domain.Questions.Aggregate
 {
@@ -20,6 +21,11 @@ namespace Domain.Questions.Aggregate
         public Question(string id)
         {
             _id = id;
+            _tags = new List<string>();
+        }
+
+        public Question()
+        {   
             _tags = new List<string>();
         }
 
@@ -65,7 +71,7 @@ namespace Domain.Questions.Aggregate
             {
                 return (AnswerOptions == null || !AnswerOptions.Any())
                     ? AnswerType.Subjective
-                    : AnswerType.Subjective;
+                    : AnswerType.MCQ;
             }
         }
 
@@ -120,18 +126,21 @@ namespace Domain.Questions.Aggregate
             _audit = Audit.EntityCreated(user);
         }
 
-        public void SetQuestion(string question, QuestionType questionType, string mediaLink = null)
+        public void SetQuestion(string question, QuestionType questionType, Guid trackingGuid = default(Guid), string mediaLink = null)
         {
+            if (string.IsNullOrEmpty(question) || string.IsNullOrWhiteSpace(question))
+                throw new DomainValidationException(trackingGuid, "Question cannot be null or empty", 4);
+
             _value = question;
             _questionType = questionType;
             if (_questionType == QuestionType.Text)
                 return;
             if (string.IsNullOrEmpty(mediaLink))
-                throw new Exception("Media Link must be provided for questions of audio/video or image type");
+                throw new DomainValidationException(trackingGuid, "Media Link must be provided for questions of audio/video or image type", 2);
 
             var mediaLinkValidity = Uri.TryCreate(mediaLink, UriKind.Absolute, out _mediaClipUri);
             if (!mediaLinkValidity)
-                throw new Exception("The Media Link is not correctly formatted");
+                throw new DomainValidationException(trackingGuid, "The Media Link is not correctly formatted", 3);
         }
 
         public void SetMcqAnswers(string correctAnswer, List<string> options)

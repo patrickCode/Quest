@@ -13,8 +13,8 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
     public class DocumentDbTests
     {
         private readonly DocumentDbConfiguration _configuration;
-        private readonly IDocumentReader<Question> _reader;
-        private readonly IDocumentWriter<Question> _writer;
+        private readonly IDocumentReader<QuestionDto> _reader;
+        private readonly IDocumentWriter<QuestionDto> _writer;
         private readonly string _sampleDocumentId;
         public DocumentDbTests()
         {
@@ -27,8 +27,8 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
                 Collection = "questions"
             };
 
-            _reader = new DocumentReader<Question>(_configuration);
-            _writer = new DocumentWriter<Question>(_configuration, _reader);
+            _reader = new DocumentReader<QuestionDto>(_configuration);
+            _writer = new DocumentWriter<QuestionDto>(_configuration, _reader);
 
             _sampleDocumentId = "Sample_Question_Id";
             CreateSampleDocument();
@@ -142,9 +142,9 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
             _writer.Create(question);
         }
 
-        private Question GetSampleQuestion(string id)
+        private QuestionDto GetSampleQuestion(string id)
         {
-            return new Question()
+            return new QuestionDto()
             {
                 Id = id,
                 Value = "Sample Question?",

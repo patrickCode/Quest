@@ -2,9 +2,9 @@
 {
     public class QuestionType
     {
-        public static QuestionType Text = new QuestionType(1, "TXT", "Text Based");
-        public static QuestionType ImageBased = new QuestionType(1, "IMG", "Image Based");
-        public static QuestionType AudioBased = new QuestionType(1, "AUD", "Audio Based");
+        public static readonly QuestionType Text = new QuestionType(1, "TXT", "Text Based");
+        public static readonly QuestionType ImageBased = new QuestionType(1, "IMG", "Image Based");
+        public static readonly QuestionType AudioBased = new QuestionType(1, "AUD", "Audio Based");
 
         public int Id { get; private set; }
         public string Code { get; private set; }
@@ -19,6 +19,17 @@
         public override string ToString()
         {
             return Type;
+        }
+
+        public static QuestionType Get(string code)
+        {
+            switch(code)
+            {
+                case "TXT": return Text;
+                case "IMG": return ImageBased;
+                case "AUD": return AudioBased;
+                default: return null;
+            }
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace Common.Model
 {
-    public class Question: DocumentEntity
+    public class QuestionDto: DocumentEntity
     {
-        public Question() { }
+        public QuestionDto() { }
         public string Value { get; set; }
         public int DifficultLevel { get; set; }
         public string QuestionTypeCode { get; set; }
@@ -19,6 +19,7 @@ namespace Common.Model
         public DateTime CreatedOn { get; set; }
         public string LastModifiedBy { get; set; }
         public DateTime LastModifedOn { get; set; }
+        public string MediaUrl { get; set; }
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
@@ -26,7 +27,7 @@ namespace Common.Model
 
         public override bool Equals(object obj)
         {
-            var otherQuestion = obj as Question;
+            var otherQuestion = obj as QuestionDto;
             if (otherQuestion == null)
                 return false;
 
