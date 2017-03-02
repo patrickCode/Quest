@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0-*",
+  "testRunner": "mstest",
+
+  "dependencies": {
+    "Azure.DocumentDb": { "target": "project" },
+    "Common": { "target": "project" },
+    "dotnet-test-mstest": "1.1.2-preview",
+    "MSTest.TestFramework": "1.1.11",
+    "Microsoft.NETCore.App": {
+      "version": "1.0.0",
+      "type": "platform"
+    }
+  },
+
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [ "dnxcore50", "portable-net45+win8" ]
+    }
+  }
+}

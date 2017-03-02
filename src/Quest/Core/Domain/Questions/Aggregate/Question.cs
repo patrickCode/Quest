@@ -17,6 +17,12 @@ namespace Domain.Questions.Aggregate
             }
         }
 
+        public Question(string id)
+        {
+            _id = id;
+            _tags = new List<string>();
+        }
+
         private string _value;
         public string Value
         {
@@ -36,7 +42,8 @@ namespace Domain.Questions.Aggregate
         }
 
         private Level _level;
-        public Level Level {
+        public Level Level
+        {
             get
             {
                 return _level;
@@ -51,13 +58,13 @@ namespace Domain.Questions.Aggregate
                 return _questionType;
             }
         }
-        
+
         public AnswerType AnswerType
         {
             get
             {
-                return (AnswerOptions == null || !AnswerOptions.Any()) 
-                    ? AnswerType.Subjective 
+                return (AnswerOptions == null || !AnswerOptions.Any())
+                    ? AnswerType.Subjective
                     : AnswerType.Subjective;
             }
         }
@@ -71,6 +78,15 @@ namespace Domain.Questions.Aggregate
             }
         }
 
+        private List<Category> _categories;
+        public List<Category> Categories
+        {
+            get
+            {
+                return _categories;
+            }
+        }
+
         private Answer _answer;
         public Answer Answer
         {
@@ -80,9 +96,28 @@ namespace Domain.Questions.Aggregate
             }
         }
 
-        public void Save(string questionId)
+        private Audit _audit;
+        public Audit Audit
+        {
+            get
+            {
+                return _audit;
+            }
+        }
+
+        private List<string> _tags;
+        public string Tags
+        {
+            get
+            {
+                return string.Join(",", _tags);
+            }
+        }
+
+        public void Save(string questionId, string user)
         {
             _id = questionId;
+            _audit = Audit.EntityCreated(user);
         }
 
         public void SetQuestion(string question, QuestionType questionType, string mediaLink = null)
@@ -109,6 +144,13 @@ namespace Domain.Questions.Aggregate
         {
             _answerOptions = null;
             _answer = new Answer(correctAnswer);
+        }
+
+        public void AddTags(params string[] tags)
+        {
+            if (_tags == null)
+                _tags = new List<string>();
+            _tags.AddRange(tags.ToList());
         }
     }
 }
