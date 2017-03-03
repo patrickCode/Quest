@@ -33,7 +33,7 @@ namespace Azure.DocumentDb
                 database.SelfLink,
                 new DocumentCollection()
                 {
-                    Id = _docDbConfiguration.Collection
+                    Id = _docDbConfiguration.QuestionCollection
                 });
         }
 
@@ -47,7 +47,7 @@ namespace Azure.DocumentDb
             await _documentClient.UpsertDocumentAsync(
                 UriFactory.CreateDocumentCollectionUri(
                     _docDbConfiguration.Database,
-                    _docDbConfiguration.Collection),
+                    _docDbConfiguration.QuestionCollection),
                 document);
         }
         
@@ -70,7 +70,7 @@ namespace Azure.DocumentDb
         {
             await _documentClient.DeleteDocumentAsync(UriFactory.CreateDocumentUri(
                 _docDbConfiguration.Database, 
-                _docDbConfiguration.Collection, 
+                _docDbConfiguration.QuestionCollection, 
                 id));
         }
     }

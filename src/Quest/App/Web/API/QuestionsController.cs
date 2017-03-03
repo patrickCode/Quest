@@ -1,5 +1,7 @@
-﻿using Common.Domain;
+﻿using System.Net;
 using Common.Model;
+using Common.Domain;
+using System.Net.Http;
 using Common.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -17,11 +19,14 @@ namespace Web.API
         }
 
         [HttpPost]
-        public async Task<string> CreateCommand([FromBody]QuestionDto question)
+        public async Task<HttpResponseMessage> CreateCommand([FromBody]QuestionDto question)
         {
             var command = new AddQuestion(question);
             var result = await _commandDispatcher.DispatchAsync(command) as IdentityResult;
-            return result.Identity;
+            return new HttpResponseMessage(HttpStatusCode.Created)
+            {
+                Content = new StringContent(result.Identity)
+            };
         }
     }
 }

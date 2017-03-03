@@ -24,7 +24,7 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
                 Endpoint = "https://doc-quest.documents.azure.com:443/",
                 PrimaryKey = "7Y9l4npDQyiTD2eQsRwZZgy8RwV4LXIMofCE0wDswegPf7IH93iVlTg815KRVlSL0TlGm5T3SzMBmP5Pkuan0w==",
                 Database = "quest",
-                Collection = "questions"
+                QuestionCollection = "questions"
             };
 
             _reader = new DocumentReader<QuestionDto>(_configuration);

@@ -3,8 +3,7 @@
 namespace Common.Domain
 {
     public abstract class CommandProcessor
-    {
-
+    {   
     }
 
     public abstract class CommandProcessor<C>: CommandProcessor where C: Command

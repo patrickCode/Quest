@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Common.Domain;
+using Common.Exceptions;
 using System.Collections.Generic;
 using Domain.Questions.ValueObject;
-using Common.Exceptions;
 
 namespace Domain.Questions.Aggregate
 {
@@ -179,6 +179,7 @@ namespace Domain.Questions.Aggregate
                 throw new DomainValidationException(trackingGuid, "Category code cannot be empty", 11);
 
             var category = new Category(categoryName, categoryCode);
+            _categories.Add(category);
         }
 
         public void SubCategorize(string categoryCode, string subCategoryName, string subCategoryCode, Guid trackingGuid = default(Guid))

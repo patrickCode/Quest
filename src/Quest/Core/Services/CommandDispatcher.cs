@@ -1,11 +1,11 @@
 ﻿using Common.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Common.Domain;
 using System.Reflection;
 using Common.Exceptions;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Services
 {
@@ -21,8 +21,8 @@ namespace Services
             foreach (var processor in processors)
             {
                 var commandTypes = processor.GetType()
-                .GetInterfaces()
-                .Where(iface => iface == genericProcessor)
+                .GetBaseClasesAndInterfaces()
+                .Where(iface => iface.IsConstructedGenericType && iface.GetGenericArguments().First().GetTypeInfo().BaseType == genericProcessor.GetGenericArguments().First().GetTypeInfo().BaseType)
                 .Select(iface => iface.GetGenericArguments().First())
                 .ToList();
 
@@ -39,7 +39,7 @@ namespace Services
                 throw new ProcessingException(Guid.NewGuid(), "No matching processor found", 14);
 
             var processor = _processors[command.GetType()];
-            CommandResult commandResult = ((dynamic)processor).Process(command);
+            CommandResult commandResult = ((dynamic)processor).Process(command as dynamic);
             return commandResult;
         }
 
@@ -49,7 +49,7 @@ namespace Services
                 throw new ProcessingException(Guid.NewGuid(), "No matching processor found", 14);
 
             var processor = _processors[command.GetType()];
-            CommandResult commandResult = await ((dynamic)processor).ProcessAsync(command);
+            CommandResult commandResult = await ((dynamic)processor).ProcessAsync(command as dynamic);
             return commandResult;
         }
     }

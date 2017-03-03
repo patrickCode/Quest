@@ -2,8 +2,10 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "Microsoft.Extensions.Configuration.Abstractions": "1.1.0",
     "NETStandard.Library": "1.6.0",
-    "Newtonsoft.Json": "10.0.1-beta1"
+    "Newtonsoft.Json": "10.0.1-beta1",
+    "System.Reflection.TypeExtensions": "4.3.0"
   },
 
   "frameworks": {

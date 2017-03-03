@@ -34,7 +34,7 @@ namespace Azure.DocumentDb
                 database.SelfLink,
                 new DocumentCollection()
                 {
-                    Id = _docDbConfiguration.Collection
+                    Id = _docDbConfiguration.QuestionCollection
                 });
         }
         public bool Exists(string id)
@@ -59,7 +59,7 @@ namespace Azure.DocumentDb
                 var document = await _documentClient.ReadDocumentAsync(
                                 UriFactory.CreateDocumentUri(
                                     _docDbConfiguration.Database,
-                                    _docDbConfiguration.Collection,
+                                    _docDbConfiguration.QuestionCollection,
                                     id));
                 var doc = (Document)document;
                 return (T)(dynamic)doc;
@@ -80,7 +80,7 @@ namespace Azure.DocumentDb
             };
 
             var documentQuery = _documentClient.CreateDocumentQuery<T>(
-                UriFactory.CreateDocumentCollectionUri(_docDbConfiguration.Database, _docDbConfiguration.Collection),
+                UriFactory.CreateDocumentCollectionUri(_docDbConfiguration.Database, _docDbConfiguration.QuestionCollection),
                 query,
                 options)
                 .ToList();
@@ -104,7 +104,7 @@ namespace Azure.DocumentDb
             };
 
             var documentQuery = _documentClient.CreateDocumentQuery<T>(
-                UriFactory.CreateDocumentCollectionUri(_docDbConfiguration.Database, _docDbConfiguration.Collection),
+                UriFactory.CreateDocumentCollectionUri(_docDbConfiguration.Database, _docDbConfiguration.QuestionCollection),
                 options)
                 .Where(query)
                 .ToList();

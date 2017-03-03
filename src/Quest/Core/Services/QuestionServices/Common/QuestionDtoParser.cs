@@ -21,9 +21,9 @@ namespace Services.QuestionServices.Common
                 LastModifedOn = question.Audit.LastModifiedOn,
                 LastModifiedBy = question.Audit.LastModifiedBy,
                 MediaUrl = question.MediaClipUri != null ? question.MediaClipUri.ToString() : string.Empty,
-                Options = question.AnswerOptions.Select(option => option.Value).ToList(),
+                Options = question.AnswerOptions != null ? question.AnswerOptions.Select(option => option.Value).ToList(): null,
                 QuestionTypeCode = question.QuestionType.Code,
-                Tags = question.Tags.Split(',').ToList(),
+                Tags = string.IsNullOrEmpty(question.Tags) ? null : question.Tags.Split(',').ToList(),
                 Value = question.Value
             };
         }
