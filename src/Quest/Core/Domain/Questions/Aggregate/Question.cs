@@ -22,11 +22,13 @@ namespace Domain.Questions.Aggregate
         {
             _id = id;
             _tags = new List<string>();
+            _categories = new List<Category>();
         }
 
         public Question()
         {   
             _tags = new List<string>();
+            _categories = new List<Category>();
         }
 
         private string _value;
@@ -143,8 +145,14 @@ namespace Domain.Questions.Aggregate
                 throw new DomainValidationException(trackingGuid, "The Media Link is not correctly formatted", 3);
         }
 
-        public void SetMcqAnswers(string correctAnswer, List<string> options)
+        public void SetMcqAnswers(string correctAnswer, List<string> options, Guid trackingGuid = default(Guid))
         {
+            if (string.IsNullOrEmpty(correctAnswer) || string.IsNullOrWhiteSpace(correctAnswer))
+                throw new DomainValidationException(trackingGuid, "Correct Answer Cannot be empty", 8);
+
+            if (options == null || !options.Any())
+                throw new DomainValidationException(trackingGuid, "No option present", 6);
+
             _answerOptions = AnswerOption.CreateOptions(correctAnswer, options);
             _answer = new Answer(_answerOptions.First(option => option.IsCorrect));
         }
@@ -160,6 +168,37 @@ namespace Domain.Questions.Aggregate
             if (_tags == null)
                 _tags = new List<string>();
             _tags.AddRange(tags.ToList());
+        }
+
+        public void Categorize(string categoryName, string categoryCode, Guid trackingGuid = default(Guid))
+        {
+            if (string.IsNullOrEmpty(categoryName) || string.IsNullOrWhiteSpace(categoryName))
+                throw new DomainValidationException(trackingGuid, "Category name cannot be empty", 11);
+
+            if (string.IsNullOrEmpty(categoryCode) || string.IsNullOrWhiteSpace(categoryCode))
+                throw new DomainValidationException(trackingGuid, "Category code cannot be empty", 11);
+
+            var category = new Category(categoryName, categoryCode);
+        }
+
+        public void SubCategorize(string categoryCode, string subCategoryName, string subCategoryCode, Guid trackingGuid = default(Guid))
+        {
+            var category = _categories.FirstOrDefault(cat => cat.Code.Equals(categoryCode));
+            if (category == null)
+                throw new DomainValidationException(trackingGuid, "No Category found to add sub-category", 10);
+
+            if (string.IsNullOrEmpty(subCategoryName) || string.IsNullOrWhiteSpace(subCategoryName))
+                throw new DomainValidationException(trackingGuid, "SubCategory name cannot be empty", 11);
+
+            if (string.IsNullOrEmpty(subCategoryCode) || string.IsNullOrWhiteSpace(subCategoryCode))
+                throw new DomainValidationException(trackingGuid, "SubCategory code cannot be empty", 11);
+
+            category.SubCategories.Add(new SubCategory(subCategoryName, subCategoryCode));
+        }
+
+        public void SetDifficultyLevel(Level level)
+        {
+            _level = level;
         }
     }
 }

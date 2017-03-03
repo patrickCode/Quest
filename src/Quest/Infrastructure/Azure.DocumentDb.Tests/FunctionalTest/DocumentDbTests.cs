@@ -152,20 +152,20 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
                 QuestionTypeCode = "TXT",
                 CorrectAnswer = "Sample Answer",
                 Options = null,
-                Categories = new List<Category>()
+                Categories = new List<CategoryDto>()
                 {
-                    new Category()
+                    new CategoryDto()
                     {
                         Value = "Angular.JS 1.0",
                         Code = "NG",
-                        SubCatgories = new List<SubCategory>()
+                        SubCatgories = new List<SubCategoryDto>()
                         {
-                            new SubCategory()
+                            new SubCategoryDto()
                             {
                                 Value = "Angular Services",
                                 Code = "NG-SVC"
                             },
-                            new SubCategory()
+                            new SubCategoryDto()
                             {
                                 Value = "Angular Providers",
                                 Code = "NG-PROV"
@@ -173,7 +173,7 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
                         }
                     }
                 },
-                Tags = "Angular,Angular-1.x,Angular-Services,Angular-Providers",
+                Tags = "Angular,Angular-1.x,Angular-Services,Angular-Providers".Split(',').ToList(),
                 DifficultLevel = 200,
                 CreatedBy = "pratikb@microsoft.com",
                 CreatedOn = DateTime.UtcNow,

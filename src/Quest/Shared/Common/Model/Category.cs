@@ -2,17 +2,17 @@
 
 namespace Common.Model
 {
-    public class Category: DocumentEntity
+    public class CategoryDto: DocumentEntity
     {
-        public Category() { }
+        public CategoryDto() { }
         public string Value { get; set; }
         public string Code { get; set; }
-        public List<SubCategory> SubCatgories { get; set; }
+        public List<SubCategoryDto> SubCatgories { get; set; }
 
     }
-    public class SubCategory
+    public class SubCategoryDto
     {
-        public SubCategory() { }
+        public SubCategoryDto() { }
         public string Value { get; set; }
         public string Code { get; set; }
     }

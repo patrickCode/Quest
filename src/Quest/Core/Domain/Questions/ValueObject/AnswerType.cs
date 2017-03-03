@@ -29,5 +29,14 @@
                 default: return null;
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            var otherAnswerType = obj as AnswerType;
+            if (otherAnswerType == null)
+                return false;
+
+            return Code == otherAnswerType.Code && Type == otherAnswerType.Type && Id == otherAnswerType.Id;
+        }
     }
 }

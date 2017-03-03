@@ -18,5 +18,26 @@
         {
             return DisplayName;
         }
+
+        public override bool Equals(object obj)
+        {
+            var otherLevel = obj as Level;
+            if (otherLevel == null)
+                return false;
+
+            return (Index == otherLevel.Index && DisplayName == otherLevel.DisplayName);
+        }
+
+        public static Level Get(int level)
+        {
+            switch(level)
+            {
+                case 100: return Basic;
+                case 200: return Amateur;
+                case 300: return Professional;
+                case 400: return Expert;
+                default: return null;
+            };
+        }
     }
 }

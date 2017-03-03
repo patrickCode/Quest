@@ -1,6 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Common.Model
 {
@@ -12,9 +13,9 @@ namespace Common.Model
         public string QuestionTypeCode { get; set; }
         public string AnswerTypeCode { get; set; }
         public string CorrectAnswer { get; set; }
-        public AnswerOptions Options { get; set; }
-        public List<Category> Categories { get; set; }
-        public string Tags { get; set; }
+        public List<string> Options { get; set; }
+        public List<CategoryDto> Categories { get; set; }
+        public List<string> Tags { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
         public string LastModifiedBy { get; set; }
@@ -36,7 +37,7 @@ namespace Common.Model
                 && CorrectAnswer == otherQuestion.CorrectAnswer
                 && AnswerTypeCode == otherQuestion.AnswerTypeCode
                 && QuestionTypeCode == otherQuestion.QuestionTypeCode
-                && Tags == otherQuestion.Tags
+                && Tags.SequenceEqual(otherQuestion.Tags)
                 && DifficultLevel == otherQuestion.DifficultLevel);
         }
 
@@ -46,12 +47,11 @@ namespace Common.Model
         }
     }
 
-    public class AnswerOptions
+    public class AnswerOption
     {
-        public AnswerOptions() { }
+        public AnswerOption() { }
         public int Option { get; set; }
         public string Code { get; set; }
         public string Answer { get; set; }
-        public bool IsCorrect { get; set; }
     }
 }
