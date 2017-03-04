@@ -128,6 +128,11 @@ namespace Domain.Questions.Aggregate
             _audit = Audit.EntityCreated(user);
         }
 
+        public void DeleteQuestion()
+        {
+
+        }
+
         public void Update(string questionId, string originalUser, DateTime createdOn, string currentUser)
         {
             _id = questionId;

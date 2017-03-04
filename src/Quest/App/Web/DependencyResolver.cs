@@ -68,6 +68,11 @@ namespace Web
                 .As<CommandProcessor>()
                 .As<CommandProcessor<UpdateQuestion>>();
 
+
+            builder.RegisterType<DeleteQuestionProcessor>()
+                .As<CommandProcessor>()
+                .As<CommandProcessor<DeleteQuestion>>();
+
             builder.RegisterType<CommandDispatcher>()
                 .As<ICommandDispatcher>()
                 .WithParameter(

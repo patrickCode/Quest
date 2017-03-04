@@ -6,6 +6,7 @@ using Common.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Common.Domain.CommandResults;
 using Services.QuestionServices.Commands;
 using Services.QuestionServices.QueryServices;
 
@@ -69,6 +70,15 @@ namespace Web.API
             {
                 Content = new StringContent(result.Identity)
             };
+        }
+        
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<HttpResponseMessage> DeleteQuestion(string id)
+        {
+            var command = new DeleteQuestion(id);
+            var result = await _commandDispatcher.DispatchAsync(command) as VoidResult;
+            return new HttpResponseMessage(HttpStatusCode.OK);
         }
     }
 }
