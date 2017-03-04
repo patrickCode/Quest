@@ -1,17 +1,19 @@
 ﻿using Autofac;
-using Autofac.Core;
-using Azure.DocumentDb;
-using Common.Configuration;
-using Common.ConfigurationResolvers;
-using Common.ConfigurationResolvers.ApplicationResolvers;
-using Common.Domain;
-using Common.Interfaces;
-using Common.Services;
-using Microsoft.Extensions.Configuration;
 using Services;
+using Common.Model;
+using Autofac.Core;
+using Common.Domain;
+using Common.Services;
+using Azure.DocumentDb;
+using Common.Interfaces;
+using Common.Configuration;
+using System.Collections.Generic;
+using Common.ConfigurationResolvers;
+using Microsoft.Extensions.Configuration;
 using Services.QuestionServices.Commands;
 using Services.QuestionServices.Processors;
-using System.Collections.Generic;
+using Services.QuestionServices.QueryServices;
+using Common.ConfigurationResolvers.ApplicationResolvers;
 
 namespace Web
 {
@@ -28,14 +30,7 @@ namespace Web
             RegisterConfigurations(builder);
             RegisterInfrastructure(builder);
             RegisterCommandProcessors(builder);
-
-            builder.RegisterType<CommandDispatcher>()
-                .As<ICommandDispatcher>()
-                .WithParameter(
-                    new ResolvedParameter(
-                        (pi, ctx) => pi.ParameterType == typeof(IEnumerable<CommandProcessor>) && pi.Name == "processors",
-                        (pi, ctx) => ctx.Resolve<IEnumerable<CommandProcessor>>()))
-                .SingleInstance();
+            RegisterQueryService(builder);
 
             base.Load(builder);
         }
@@ -68,6 +63,21 @@ namespace Web
             builder.RegisterType<AddQuestionProcessor>()
                 .As<CommandProcessor>()
                 .As<CommandProcessor<AddQuestion>>();
+
+            builder.RegisterType<CommandDispatcher>()
+                .As<ICommandDispatcher>()
+                .WithParameter(
+                    new ResolvedParameter(
+                        (pi, ctx) => pi.ParameterType == typeof(IEnumerable<CommandProcessor>) && pi.Name == "processors",
+                        (pi, ctx) => ctx.Resolve<IEnumerable<CommandProcessor>>()))
+                .SingleInstance();
+        }
+
+        private void RegisterQueryService(ContainerBuilder builder)
+        {
+            builder.RegisterType<QuestionsQueryService>()
+                .As<IQuestionsQueryService>()
+                .As<IQueryService<QuestionDto>>();
         }
     }
 }

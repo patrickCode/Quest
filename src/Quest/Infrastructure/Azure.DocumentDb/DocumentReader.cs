@@ -72,6 +72,29 @@ namespace Azure.DocumentDb
             }
         }
 
+        public List<T> Get()
+        {
+            var options = new FeedOptions()
+            {
+                MaxItemCount = -1
+            };
+
+            var documentQuery = _documentClient.CreateDocumentQuery<T>(
+                UriFactory.CreateDocumentCollectionUri(_docDbConfiguration.Database, _docDbConfiguration.QuestionCollection),
+                options)
+                .ToList();
+
+            return documentQuery;
+        }
+
+        public async Task<List<T>> GetAsync()
+        {
+            return await Task.Run(() =>
+            {
+                return Get();
+            });
+        }
+
         public List<T> Query(string query)
         {
             var options = new FeedOptions()

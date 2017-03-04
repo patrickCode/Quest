@@ -11,6 +11,8 @@ namespace Common.Interfaces
         Task<bool> ExistsAsync(string id);
         Doc Get(string id);
         Task<Doc> GetAsync(string id);
+        List<Doc> Get();
+        Task<List<Doc>> GetAsync();
         List<Doc> Query(string sqlQuery);
         Task<List<Doc>> QueryAsync(string sqlQuery);
         List<Doc> Query(Func<Doc, bool> query);

@@ -28,6 +28,10 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Quest.Services", "Core\Serv
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Quest.Azure.DocumentDb.Tests", "Infrastructure\Azure.DocumentDb.Tests\Quest.Azure.DocumentDb.Tests.xproj", "{73E57F94-7DEF-44BF-84CB-2CBE1BAB57A3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FunctionalTests", "FunctionalTests", "{D1D210C3-F13B-4551-A47C-63FB56B10CEF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "IntegrationTests", "FunctionalTests\IntegrationTests\IntegrationTests.xproj", "{9473B7E1-DF7E-40A6-81BD-2183CCAA8090}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +62,10 @@ Global
 		{73E57F94-7DEF-44BF-84CB-2CBE1BAB57A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73E57F94-7DEF-44BF-84CB-2CBE1BAB57A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73E57F94-7DEF-44BF-84CB-2CBE1BAB57A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9473B7E1-DF7E-40A6-81BD-2183CCAA8090}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9473B7E1-DF7E-40A6-81BD-2183CCAA8090}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9473B7E1-DF7E-40A6-81BD-2183CCAA8090}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9473B7E1-DF7E-40A6-81BD-2183CCAA8090}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +77,6 @@ Global
 		{9B144B50-4B20-49BC-9E62-84CF06B5CA2C} = {923C79DD-6909-47BF-9ECC-3B7A885E75C2}
 		{5FFCC050-FAB7-4B3C-BF58-ACF1A6B76B9F} = {688A6121-B0E2-4FC9-A3A1-4AB269EAE0B8}
 		{73E57F94-7DEF-44BF-84CB-2CBE1BAB57A3} = {E0FCA76E-CF50-4773-927F-2A0A7404BDA2}
+		{9473B7E1-DF7E-40A6-81BD-2183CCAA8090} = {D1D210C3-F13B-4551-A47C-63FB56B10CEF}
 	EndGlobalSection
 EndGlobal

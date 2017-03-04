@@ -5,7 +5,9 @@ using System.Net.Http;
 using Common.Services;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using Services.QuestionServices.Commands;
+using Services.QuestionServices.QueryServices;
 
 namespace Web.API
 {
@@ -13,13 +15,42 @@ namespace Web.API
     public class QuestionsController: Controller
     {
         private readonly ICommandDispatcher _commandDispatcher;
-        public QuestionsController(ICommandDispatcher commandDispatcher)
+        private readonly IQuestionsQueryService _questionsQueryService;
+        public QuestionsController(ICommandDispatcher commandDispatcher, IQuestionsQueryService questionsQueryService)
         {
             _commandDispatcher = commandDispatcher;
+            _questionsQueryService = questionsQueryService;
+        }
+
+        [HttpGet]
+        public async Task<IList<QuestionDto>> Get()
+        {
+            return await _questionsQueryService.GetAsync();
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<QuestionDto> Get(string id)
+        {
+            return await _questionsQueryService.GetAsync(id);
+        }
+
+        [HttpGet]
+        [Route("/api/categories/{category}/questions")]
+        public async Task<IList<QuestionDto>> GetByCategory(string category)
+        {
+            return await _questionsQueryService.GetByCategoryAsync(category);
+        }
+
+        [HttpGet]
+        [Route("/api/users/{upn}/questions")]
+        public async Task<IList<QuestionDto>> GetByUser(string upn)
+        {
+            return await _questionsQueryService.GetByUserAsync(upn);
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> CreateCommand([FromBody]QuestionDto question)
+        public async Task<HttpResponseMessage> CreateQuestion([FromBody]QuestionDto question)
         {
             var command = new AddQuestion(question);
             var result = await _commandDispatcher.DispatchAsync(command) as IdentityResult;

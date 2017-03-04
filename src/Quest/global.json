@@ -1,3 +1,3 @@
 {
-  "projects": [ "Shared", "Infrastructure", "Core" ]
+  "projects": [ "Shared", "Infrastructure", "Core", "App" ]
 }
