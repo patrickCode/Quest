@@ -37,12 +37,12 @@ namespace Azure.DocumentDb
                 });
         }
 
-        public void Create(T document)
+        public void CreateOrUpdate(T document)
         {
-            CreateAsync(document).Wait();
+            CreateOrUpdateAsync(document).Wait();
         }
 
-        public async Task CreateAsync(T document)
+        public async Task CreateOrUpdateAsync(T document)
         {
             await _documentClient.UpsertDocumentAsync(
                 UriFactory.CreateDocumentCollectionUri(

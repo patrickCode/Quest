@@ -84,7 +84,7 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
             var question = GetSampleQuestion(id);
 
             //Action
-            await _writer.CreateAsync(question);
+            await _writer.CreateOrUpdateAsync(question);
             var document = await _reader.GetAsync(id);
 
             //Assert
@@ -105,7 +105,7 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
             existingDocument.CorrectAnswer = newCorrectAnswer;
 
             //Action
-            await _writer.CreateAsync(existingDocument);
+            await _writer.CreateOrUpdateAsync(existingDocument);
             var document = await _reader.GetAsync(id);
 
             //Assert
@@ -121,7 +121,7 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
             var question = GetSampleQuestion(id);
 
             //Action
-            await _writer.CreateAsync(question);
+            await _writer.CreateOrUpdateAsync(question);
             var document = await _reader.GetAsync(id);
 
             //Pre-Verification
@@ -139,7 +139,7 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
         private void CreateSampleDocument()
         {
             var question = GetSampleQuestion(_sampleDocumentId);
-            _writer.Create(question);
+            _writer.CreateOrUpdate(question);
         }
 
         private QuestionDto GetSampleQuestion(string id)

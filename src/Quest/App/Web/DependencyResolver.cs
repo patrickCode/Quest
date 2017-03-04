@@ -64,6 +64,10 @@ namespace Web
                 .As<CommandProcessor>()
                 .As<CommandProcessor<AddQuestion>>();
 
+            builder.RegisterType<UpdateQuestionProcessor>()
+                .As<CommandProcessor>()
+                .As<CommandProcessor<UpdateQuestion>>();
+
             builder.RegisterType<CommandDispatcher>()
                 .As<ICommandDispatcher>()
                 .WithParameter(

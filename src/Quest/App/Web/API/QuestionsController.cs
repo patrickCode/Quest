@@ -49,6 +49,17 @@ namespace Web.API
             return await _questionsQueryService.GetByUserAsync(upn);
         }
 
+        [HttpPut]
+        public async Task<HttpResponseMessage> UpdateQuestion([FromBody]QuestionDto question)
+        {
+            var command = new UpdateQuestion(question);
+            var result = await _commandDispatcher.DispatchAsync(command) as IdentityResult;
+            return new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(result.Identity)
+            };
+        }
+
         [HttpPost]
         public async Task<HttpResponseMessage> CreateQuestion([FromBody]QuestionDto question)
         {

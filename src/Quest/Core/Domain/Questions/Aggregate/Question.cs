@@ -128,6 +128,12 @@ namespace Domain.Questions.Aggregate
             _audit = Audit.EntityCreated(user);
         }
 
+        public void Update(string questionId, string originalUser, DateTime createdOn, string currentUser)
+        {
+            _id = questionId;
+            _audit = Audit.EntityModified(originalUser, createdOn, currentUser);
+        }
+
         public void SetQuestion(string question, QuestionType questionType, Guid trackingGuid = default(Guid), string mediaLink = null)
         {
             if (string.IsNullOrEmpty(question) || string.IsNullOrWhiteSpace(question))
