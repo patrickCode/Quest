@@ -28,11 +28,11 @@ namespace Services.QuestionServices.Common
             };
         }
 
-        private IEnumerable<CategoryDto> GetCategories(Question question)
+        private IEnumerable<Category> GetCategories(Question question)
         {
             foreach(var category in question.Categories)
             {
-                var categoryDto = new CategoryDto()
+                var categoryDto = new Category()
                 {
                     Code = category.Code,
                     Value = category.Value
@@ -40,10 +40,10 @@ namespace Services.QuestionServices.Common
                 if (category.SubCategories == null || !category.SubCategories.Any())
                     yield return categoryDto;
 
-                categoryDto.SubCatgories = new List<SubCategoryDto>();
+                categoryDto.SubCatgories = new List<SubCategory>();
                 category.SubCategories.ForEach(subCategory =>
                 {
-                    categoryDto.SubCatgories.Add(new SubCategoryDto()
+                    categoryDto.SubCatgories.Add(new SubCategory()
                     {
                         Code = subCategory.Code,
                         Value = subCategory.Value

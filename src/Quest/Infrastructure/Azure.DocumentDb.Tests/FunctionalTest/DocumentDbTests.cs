@@ -4,6 +4,7 @@ using Common.Model;
 using Common.Interfaces;
 using Common.Configuration;
 using System.Threading.Tasks;
+using Azure.DocumentDb.Utility;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -24,11 +25,12 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
                 Endpoint = "https://doc-quest.documents.azure.com:443/",
                 PrimaryKey = "7Y9l4npDQyiTD2eQsRwZZgy8RwV4LXIMofCE0wDswegPf7IH93iVlTg815KRVlSL0TlGm5T3SzMBmP5Pkuan0w==",
                 Database = "quest",
-                QuestionCollection = "questions"
+                QuestionCollection = "questions",
+                CategoriesCollection = "categories"
             };
 
-            _reader = new DocumentReader<QuestionDto>(_configuration);
-            _writer = new DocumentWriter<QuestionDto>(_configuration, _reader);
+            _reader = new DocumentReader<QuestionDto>(_configuration, new CollectionNameResolver(_configuration));
+            _writer = new DocumentWriter<QuestionDto>(_configuration, _reader, new CollectionNameResolver(_configuration));
 
             _sampleDocumentId = "Sample_Question_Id";
             CreateSampleDocument();
@@ -50,10 +52,7 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
 
         [TestMethod]
         public async Task QueryDocument()
-        {
-            //Init
-            var id = _sampleDocumentId;
-
+        {   
             //Action
             var documents = await _reader.QueryAsync(q => q.Categories.Any(c => c.Code == "NG"));
 
@@ -64,10 +63,7 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
 
         [TestMethod]
         public async Task QueryDocumentBySqlQuery()
-        {
-            //Init
-            var id = _sampleDocumentId;
-
+        {   
             //Action
             var documents = await _reader.QueryAsync("SELECT c.id, c['Value'] FROM c JOIN cat in c.Categories WHERE cat.Code = \"NG\"");
 
@@ -152,20 +148,20 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
                 QuestionTypeCode = "TXT",
                 CorrectAnswer = "Sample Answer",
                 Options = null,
-                Categories = new List<CategoryDto>()
+                Categories = new List<Category>()
                 {
-                    new CategoryDto()
+                    new Category()
                     {
                         Value = "Angular.JS 1.0",
                         Code = "NG",
-                        SubCatgories = new List<SubCategoryDto>()
+                        SubCatgories = new List<SubCategory>()
                         {
-                            new SubCategoryDto()
+                            new SubCategory()
                             {
                                 Value = "Angular Services",
                                 Code = "NG-SVC"
                             },
-                            new SubCategoryDto()
+                            new SubCategory()
                             {
                                 Value = "Angular Providers",
                                 Code = "NG-PROV"

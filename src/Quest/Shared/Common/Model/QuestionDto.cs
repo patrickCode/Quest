@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Linq;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Common.Model
 {
@@ -14,7 +14,7 @@ namespace Common.Model
         public string AnswerTypeCode { get; set; }
         public string CorrectAnswer { get; set; }
         public List<string> Options { get; set; }
-        public List<CategoryDto> Categories { get; set; }
+        public List<Category> Categories { get; set; }
         public List<string> Tags { get; set; }
         public string CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }
@@ -40,11 +40,6 @@ namespace Common.Model
                 && Tags.SequenceEqual(otherQuestion.Tags)
                 && DifficultLevel == otherQuestion.DifficultLevel);
         }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
     }
 
     public class AnswerOption
@@ -53,5 +48,20 @@ namespace Common.Model
         public int Option { get; set; }
         public string Code { get; set; }
         public string Answer { get; set; }
+    }
+
+    public class Category
+    {
+        public Category() { }
+        public string Value { get; set; }
+        public string Code { get; set; }
+        public List<SubCategory> SubCatgories { get; set; }
+
+    }
+    public class SubCategory
+    {
+        public SubCategory() { }
+        public string Value { get; set; }
+        public string Code { get; set; }
     }
 }

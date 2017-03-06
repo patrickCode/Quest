@@ -5,6 +5,7 @@ using Common.Model;
 using Common.Interfaces;
 using Common.Configuration;
 using System.Threading.Tasks;
+using Azure.DocumentDb.Utility;
 using Microsoft.Azure.Documents;
 using System.Collections.Generic;
 using Microsoft.Azure.Documents.Client;
@@ -15,11 +16,12 @@ namespace Azure.DocumentDb
     {
         private readonly DocumentDbConfiguration _docDbConfiguration;
         private readonly DocumentClient _documentClient;
-
-        public DocumentReader(DocumentDbConfiguration docDbConfiguration)
+        private readonly ICollectionNameResolver _collectionNameResolver;
+        public DocumentReader(DocumentDbConfiguration docDbConfiguration, ICollectionNameResolver collectionNameResolver)
         {
             _docDbConfiguration = docDbConfiguration;
             _documentClient = new DocumentClient(new Uri(_docDbConfiguration.Endpoint), _docDbConfiguration.PrimaryKey);
+            _collectionNameResolver = collectionNameResolver;
             Init().Wait();
         }
 
@@ -34,7 +36,7 @@ namespace Azure.DocumentDb
                 database.SelfLink,
                 new DocumentCollection()
                 {
-                    Id = _docDbConfiguration.QuestionCollection
+                    Id = _collectionNameResolver.Resolve(typeof(T))
                 });
         }
         public bool Exists(string id)

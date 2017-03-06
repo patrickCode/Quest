@@ -17,7 +17,8 @@ namespace Common.ConfigurationResolvers.ApplicationResolvers
                 Endpoint = _configurationSection["Endpoint"],
                 PrimaryKey = _configurationSection["PrimaryKey"],
                 Database = _configurationSection["Database"],
-                QuestionCollection = _configurationSection["QuestionsCollection"]
+                QuestionCollection = _configurationSection["QuestionsCollection"],
+                CategoriesCollection = _configurationSection["CategoriesCollection"],
             };
         }
     }

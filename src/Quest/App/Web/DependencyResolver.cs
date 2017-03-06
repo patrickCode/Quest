@@ -7,6 +7,7 @@ using Common.Services;
 using Azure.DocumentDb;
 using Common.Interfaces;
 using Common.Configuration;
+using Azure.DocumentDb.Utility;
 using System.Collections.Generic;
 using Common.ConfigurationResolvers;
 using Microsoft.Extensions.Configuration;
@@ -50,6 +51,10 @@ namespace Web
 
         private void RegisterInfrastructure(ContainerBuilder builder)
         {
+            builder.RegisterType<CollectionNameResolver>()
+                .As(typeof(ICollectionNameResolver))
+                .InstancePerLifetimeScope();
+
             builder.RegisterGeneric(typeof(DocumentReader<>))
                 .As(typeof(IDocumentReader<>))
                 .InstancePerLifetimeScope();

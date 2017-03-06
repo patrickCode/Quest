@@ -17,5 +17,6 @@ namespace Common.Configuration
         public string PrimaryKey { get; set; }
         public string Database { get; set; }
         public string QuestionCollection { get; set; }
+        public string CategoriesCollection { get; set; }
     }
 }
