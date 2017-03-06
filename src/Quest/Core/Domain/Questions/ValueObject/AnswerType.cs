@@ -3,7 +3,7 @@
     public class AnswerType
     {
         public static readonly AnswerType MCQ = new AnswerType(1, "MCQ", "Multi Choice Answer");
-        public static readonly AnswerType Subjective = new AnswerType(1, "SUB", "Subjective");
+        public static readonly AnswerType Subjective = new AnswerType(2, "SUB", "Subjective");
 
         public int Id { get; private set; }
         public string Code { get; private set; }

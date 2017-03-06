@@ -13,6 +13,7 @@ namespace Common.Configuration
             Database = config.Database;
             QuestionCollection = config.QuestionCollection;
             CategoriesCollection = config.CategoriesCollection;
+            MetadataCollection = config.MetadataCollection;
         }
         public string Endpoint { get; set; }
         public string PrimaryKey { get; set; }
@@ -20,5 +21,6 @@ namespace Common.Configuration
 
         public string QuestionCollection { get; set; }
         public string CategoriesCollection { get; set; }
+        public string MetadataCollection { get; set; }
     }
 }

@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Services.QuestionServices.Commands;
 using Services.QuestionServices.Processors;
 using Services.CategoryServices.QueryServices;
+using Services.MetadataServices.QueryServices;
 using Services.QuestionServices.QueryServices;
 using Common.ConfigurationResolvers.ApplicationResolvers;
 
@@ -101,6 +102,9 @@ namespace Web
             builder.RegisterType<CategoriesQueryService>()
                 .As<ICategoriesQueryService>()
                 .As<IQueryService<CategoryDto>>();
+
+            builder.RegisterType<MetadataQueryService>()
+                .As<IMetadataQueryService>();
         }
     }
 }

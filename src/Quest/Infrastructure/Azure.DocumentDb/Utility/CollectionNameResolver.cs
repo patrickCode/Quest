@@ -2,6 +2,7 @@
 using Common.Model;
 using Common.Exceptions;
 using Common.Configuration;
+using Common.Model.Metadata;
 using System.Collections.Generic;
 
 namespace Azure.DocumentDb.Utility
@@ -17,7 +18,12 @@ namespace Azure.DocumentDb.Utility
             _collectionNameMapping = new Dictionary<Type, string>()
             {
                 {typeof(QuestionDto), _configuration.QuestionCollection },
-                {typeof(CategoryDto), _configuration.CategoriesCollection }
+                {typeof(CategoryDto), _configuration.CategoriesCollection },
+                
+                {typeof(MetadataBaseDto), _configuration.MetadataCollection },
+                {typeof(QuestionTypeDto), _configuration.MetadataCollection },
+                {typeof(AnswerTypeDto), _configuration.MetadataCollection },
+                {typeof(DifficultyLevelDto), _configuration.MetadataCollection }
             };
         }
 
