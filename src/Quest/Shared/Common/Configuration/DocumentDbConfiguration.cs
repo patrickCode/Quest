@@ -12,10 +12,12 @@ namespace Common.Configuration
             PrimaryKey = config.PrimaryKey;
             Database = config.Database;
             QuestionCollection = config.QuestionCollection;
+            CategoriesCollection = config.CategoriesCollection;
         }
         public string Endpoint { get; set; }
         public string PrimaryKey { get; set; }
         public string Database { get; set; }
+
         public string QuestionCollection { get; set; }
         public string CategoriesCollection { get; set; }
     }

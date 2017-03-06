@@ -16,12 +16,15 @@ namespace Azure.DocumentDb
         private readonly DocumentClient _documentClient;
         private readonly IDocumentReader<T> _documentReader;
         private readonly ICollectionNameResolver _collectionNameResolver;
+        private readonly string _collectionName;
+
         public DocumentWriter(DocumentDbConfiguration docDbConfiguration, IDocumentReader<T> documentReader, ICollectionNameResolver collectionNameResolver)
         {
             _docDbConfiguration = docDbConfiguration;
             _documentClient = new DocumentClient(new Uri(_docDbConfiguration.Endpoint), _docDbConfiguration.PrimaryKey);
             _documentReader = documentReader;
             _collectionNameResolver = collectionNameResolver;
+            _collectionName = _collectionNameResolver.Resolve(typeof(T));
             Init().Wait();
         }
 
@@ -36,7 +39,7 @@ namespace Azure.DocumentDb
                 database.SelfLink,
                 new DocumentCollection()
                 {
-                    Id = _collectionNameResolver.Resolve(typeof(T))
+                    Id = _collectionName
                 });
         }
 
@@ -50,7 +53,7 @@ namespace Azure.DocumentDb
             await _documentClient.UpsertDocumentAsync(
                 UriFactory.CreateDocumentCollectionUri(
                     _docDbConfiguration.Database,
-                    _docDbConfiguration.QuestionCollection),
+                    _collectionName),
                 document);
         }
         
@@ -72,8 +75,8 @@ namespace Azure.DocumentDb
         public async Task DeleteAsync(string id)
         {
             await _documentClient.DeleteDocumentAsync(UriFactory.CreateDocumentUri(
-                _docDbConfiguration.Database, 
-                _docDbConfiguration.QuestionCollection, 
+                _docDbConfiguration.Database,
+                _collectionName, 
                 id));
         }
     }

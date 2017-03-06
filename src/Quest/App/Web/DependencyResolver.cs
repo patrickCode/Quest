@@ -13,12 +13,13 @@ using Common.ConfigurationResolvers;
 using Microsoft.Extensions.Configuration;
 using Services.QuestionServices.Commands;
 using Services.QuestionServices.Processors;
+using Services.CategoryServices.QueryServices;
 using Services.QuestionServices.QueryServices;
 using Common.ConfigurationResolvers.ApplicationResolvers;
 
 namespace Web
 {
-    public class DependencyResolver: Module
+    public class DependencyResolver : Module
     {
         private readonly IConfigurationRoot _configuration;
         public DependencyResolver(IConfigurationRoot Configuration)
@@ -31,7 +32,7 @@ namespace Web
             RegisterConfigurations(builder);
             RegisterInfrastructure(builder);
             RegisterCommandProcessors(builder);
-            RegisterQueryService(builder);
+            RegisterQueryServices(builder);
 
             base.Load(builder);
         }
@@ -44,16 +45,20 @@ namespace Web
                 .WithParameter(
                 new ResolvedParameter(
                     (pi, ctx) => pi.ParameterType == typeof(IConfigurationSection) && pi.Name == "conifigurationSection",
-                    (pi, ctx) => _configuration.GetSection("Azure").GetSection("DocumentDb")));
+                    (pi, ctx) => _configuration.GetSection("Azure").GetSection("DocumentDb")))
+                .SingleInstance();
+
             builder.RegisterType<DocumentDbConfiguration>()
-                .AsSelf();
+                .AsSelf()
+                .SingleInstance();
         }
 
         private void RegisterInfrastructure(ContainerBuilder builder)
         {
             builder.RegisterType<CollectionNameResolver>()
                 .As(typeof(ICollectionNameResolver))
-                .InstancePerLifetimeScope();
+                .InstancePerLifetimeScope()
+                .SingleInstance();
 
             builder.RegisterGeneric(typeof(DocumentReader<>))
                 .As(typeof(IDocumentReader<>))
@@ -87,11 +92,15 @@ namespace Web
                 .SingleInstance();
         }
 
-        private void RegisterQueryService(ContainerBuilder builder)
+        private void RegisterQueryServices(ContainerBuilder builder)
         {
             builder.RegisterType<QuestionsQueryService>()
                 .As<IQuestionsQueryService>()
                 .As<IQueryService<QuestionDto>>();
+
+            builder.RegisterType<CategoriesQueryService>()
+                .As<ICategoriesQueryService>()
+                .As<IQueryService<CategoryDto>>();
         }
     }
 }
