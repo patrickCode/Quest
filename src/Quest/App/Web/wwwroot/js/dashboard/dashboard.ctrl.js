@@ -10,6 +10,19 @@
         $scope.availableCategories = [];
         $scope.selectedCategory = "None";
 
+        $scope.orderOn = "difficultLevel"
+        $scope.orderByDesc = false;
+
+        var changeOrder = function (orderOn) {
+            if ($scope.orderOn === orderOn) {
+                $scope.orderByDesc = !$scope.orderByDesc;
+            }
+            else {
+                $scope.orderOn = orderOn;
+                $scope.orderByDesc = false;
+            }
+        }
+
         var getUserQuestions = function () {
             $scope.questionsLoading = true;
             $scope.errorOcurredWhileLoadingQuestions = false;
@@ -32,6 +45,7 @@
 
         var init = function () {
             $scope.getUserQuestions = getUserQuestions;
+            $scope.changeOrder = changeOrder;
             $scope.getUserQuestions();
         }
         init();
