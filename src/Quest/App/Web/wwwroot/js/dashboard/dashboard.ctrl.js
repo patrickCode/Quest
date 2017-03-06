@@ -7,6 +7,8 @@
         $scope.questionsLoading = false;
         $scope.errorOcurredWhileLoadingQuestions = false;
         $scope.errorMessage = "";
+        $scope.availableCategories = [];
+        $scope.selectedCategory = "None";
 
         var getUserQuestions = function () {
             $scope.questionsLoading = true;
@@ -14,6 +16,11 @@
             questionsData.getUserQuestions($scope.userId)
                 .then(function (data) {
                     $scope.questions = data;
+                    $scope.availableCategories = _.uniq(_.flatten(
+                        _.map($scope.questions, function (question) {
+                            return question.categories;
+                        })),
+                        _.property('code'));
                     $scope.questionsLoading = false;
                 })
                 .catch(function (error) {

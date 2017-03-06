@@ -11,23 +11,23 @@
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
-input,
+/*input,
 select,
 textarea {
     max-width: 280px;
 }
 
 /* Carousel */
-.carousel-caption p {
+/*.carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
-}
+}*/
 
 /* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"]
+/*.carousel-inner .item img[src$=".svg"]
 {
     width: 100%;
-}
+}*/
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
@@ -35,4 +35,19 @@ textarea {
   .carousel-caption {
     display: none
   }
+}
+
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
 }

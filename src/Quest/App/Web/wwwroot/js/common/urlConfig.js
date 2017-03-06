@@ -1,7 +1,7 @@
 ﻿(function (module) {
 
     var urlConfig = function () {
-        var baseUrl = "http://localhost:7578/api/";
+        var baseUrl = "http://questhunt.azurewebsites.net/api/";
 
         var questionsByUserIdUrl = "users/{userId}/questions";
         var questionsByUserId = function (userId) {
