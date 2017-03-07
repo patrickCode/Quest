@@ -25,10 +25,12 @@ namespace Domain.Questions.ValueObject
             var answerOptions = new AnswerOption[options.Count + 1];
             answerOptions[correctAnswerOptionNumber] = new AnswerOption(correctAnswerOptionNumber + 1, correctAnswerOptionNumber.ToString(), correctAnswer, true);
 
+            var currentOptionNumber = correctAnswerOptionNumber;
             foreach (var option in options)
             {
-                var nextOptionNumber = (correctAnswerOptionNumber + 1) % (answerOptions.Length);
+                var nextOptionNumber = (currentOptionNumber + 1) % (answerOptions.Length);
                 answerOptions[nextOptionNumber] = new AnswerOption(nextOptionNumber + 1, nextOptionNumber.ToString(), option, false);
+                currentOptionNumber = nextOptionNumber;
             }
 
             return answerOptions.ToList();

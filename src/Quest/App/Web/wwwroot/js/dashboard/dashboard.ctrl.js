@@ -1,6 +1,6 @@
 ﻿(function (module) {
 
-    var dashboardCtrl = function ($scope, questionsData) {
+    var dashboardCtrl = function ($scope, questionsData, categories) {
 
         $scope.userId = "pratikb@microsoft.com";
         $scope.questions = [];

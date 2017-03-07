@@ -63,8 +63,8 @@
             <tbody>
                 <tr ng-repeat="question in filteredQuestions = (questions | questionsCategoryFilter:selectedCategory | filter:searchText | orderBy:orderOn:orderByDesc) | paginate:pagination.currentPage:pagination.pageSize">
                     <td>{{question.value}}</td>
-                    <td>{{question.questionTypeCode}}</td>
-                    <td>{{question.answerTypeCode}}</td>
+                    <td><question-type question-type-code="{{question.questionTypeCode}}"></td>
+                    <td><answer-type answer-type-code="{{question.answerTypeCode}}"></td>
                     <td>{{question.correctAnswer | limitTo:20}}<span ng-show="question.correctAnswer.length > 20">...</span></td>
                     <td><level index="question.difficultLevel"></td>
                     <td>{{question.createdOn | date:'short'}}</td>

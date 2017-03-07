@@ -63,10 +63,11 @@ namespace Web
 
             builder.RegisterGeneric(typeof(DocumentReader<>))
                 .As(typeof(IDocumentReader<>))
-                .InstancePerLifetimeScope();
+                .SingleInstance();
             builder.RegisterGeneric(typeof(DocumentWriter<>))
                 .As(typeof(IDocumentWriter<>))
-                .InstancePerLifetimeScope();
+                .InstancePerLifetimeScope()
+                .SingleInstance();
         }
 
         private void RegisterCommandProcessors(ContainerBuilder builder)
