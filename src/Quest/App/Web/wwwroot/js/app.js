@@ -1,8 +1,9 @@
 ﻿angular.module("common", []);
+angular.module("metadata", ["common"]);
 angular.module("question", ["common"]);
 angular.module("dashboard", ["common", "question"]);
 
-angular.module("quest", ["ui.router", "common", "question", "dashboard"])
+angular.module("quest", ["ui.router", "common", "metadata", "question", "dashboard"])
     .config([
         '$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider',
         function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {

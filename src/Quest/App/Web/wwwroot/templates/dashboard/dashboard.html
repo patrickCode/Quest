@@ -36,7 +36,7 @@
                     </th>
                     <th>
                         Question Type
-                        
+
                     </th>
                     <th>
                         Answer Type
@@ -44,14 +44,14 @@
                     <th>
                         Answer
                     </th>
-                    <th  ng-click="changeOrder('difficultLevel')" style="cursor:pointer">
+                    <th ng-click="changeOrder('difficultLevel')" style="cursor:pointer">
                         Level
                         <span ng-show="orderOn === 'difficultLevel'">
                             <span ng-hide="orderByDesc"><i class="glyphicon glyphicon-triangle-top"></i></span>
                             <span ng-show="orderByDesc"><i class="glyphicon glyphicon-triangle-bottom"></i></span>
                         </span>
                     </th>
-                    <th  ng-click="changeOrder('createdOn')" style="cursor:pointer">
+                    <th ng-click="changeOrder('createdOn')" style="cursor:pointer">
                         Added On
                         <span ng-show="orderOn === 'createdOn'">
                             <span ng-hide="orderByDesc"><i class="glyphicon glyphicon-triangle-top"></i></span>
@@ -61,15 +61,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="question in questions | questionsCategoryFilter:selectedCategory | filter:searchText | orderBy:orderOn:orderByDesc ">
+                <tr ng-repeat="question in filteredQuestions = (questions | questionsCategoryFilter:selectedCategory | filter:searchText | orderBy:orderOn:orderByDesc) | paginate:pagination.currentPage:pagination.pageSize">
                     <td>{{question.value}}</td>
                     <td>{{question.questionTypeCode}}</td>
                     <td>{{question.answerTypeCode}}</td>
                     <td>{{question.correctAnswer | limitTo:20}}<span ng-show="question.correctAnswer.length > 20">...</span></td>
-                    <td>{{question.difficultLevel}}</td>
+                    <td><level index="question.difficultLevel"></td>
                     <td>{{question.createdOn | date:'short'}}</td>
                 </tr>
             </tbody>
         </table>
+
+        <pagination class="pull-right" current-page="pagination.currentPage" page-size="{{pagination.pageSize}}" total-records="filteredQuestions.length"></pagination>
     </div>
 </div>

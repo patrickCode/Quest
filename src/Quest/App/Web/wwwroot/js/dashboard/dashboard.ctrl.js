@@ -13,6 +13,13 @@
         $scope.orderOn = "difficultLevel"
         $scope.orderByDesc = false;
 
+        $scope.pagination = {
+            currentPage: 1,
+            pageSize: 3
+        };
+
+        $scope.totalCount = 0;
+
         var changeOrder = function (orderOn) {
             if ($scope.orderOn === orderOn) {
                 $scope.orderByDesc = !$scope.orderByDesc;
@@ -28,6 +35,7 @@
             $scope.errorOcurredWhileLoadingQuestions = false;
             questionsData.getUserQuestions($scope.userId)
                 .then(function (data) {
+                    $scope.totalCount = data.length;
                     $scope.questions = data;
                     $scope.availableCategories = _.uniq(_.flatten(
                         _.map($scope.questions, function (question) {

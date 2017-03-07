@@ -1,0 +1,20 @@
+﻿<ul ng-show="totalPages > 0" class="pagination">
+    <li ng-click="changePage(1)">
+        <a href="javascript:void(0)" style="padding-top:13px;padding-bottom:13px;"><i class="glyphicon glyphicon-backward"></i></a>
+    </li>
+    <li ng-click="changePage(currentPage - 1)">
+        <a href="javascript:void(0)" style="padding-top:13px;padding-bottom:13px;"><i class="glyphicon glyphicon-chevron-left"></i></a>
+    </li>
+    <li style="padding:0px;">
+        <a style="width:30%; display:inline-block">
+            <input class="form-control" type="number" ng-model="currentPageTemp" ng-change="pageNumberChanged()" style="width:40%; display:inline-block; padding:8px;" />
+            <span style="display:inline">of {{totalPages}}</span> 
+        </a>
+    </li>
+    <li ng-click="changePage(currentPage + 1)">
+        <a href="javascript:void(0)" style="padding-top:13px;padding-bottom:13px;"><i class="glyphicon glyphicon-forward"></i></a>
+    </li>
+    <li ng-click="changePage(totalPages)">
+        <a href="javascript:void(0)" style="padding-top:13px;padding-bottom:13px;"><i class="glyphicon glyphicon-chevron-right"></i></a>
+    </li>
+</ul>
