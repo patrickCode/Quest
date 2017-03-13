@@ -1,6 +1,6 @@
 ﻿(function (module) {
 
-    var addQuestionController = function ($scope, $location, questionsData, categories, questionTypes, answerTypes, difficultyLevels) {
+    var addQuestionController = function ($scope, $location, questionsData, appInsightsLogger, categories, questionTypes, answerTypes, difficultyLevels) {
 
         $scope.question = {
             "value": null,
@@ -77,6 +77,8 @@
         }
 
         var init = function () {
+            appInsightsLogger.logView("Add Question", "questions/add");
+
             $scope.categories = categories;
             $scope.questionTypes = questionTypes;
             $scope.answerTypes = answerTypes;

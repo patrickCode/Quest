@@ -30,6 +30,8 @@ namespace Web
             services.AddMvc();
             services.AddMvc().AddWebApiConventions();
 
+            services.AddSingleton<IConfiguration>(sp => { return Configuration; });
+
             //Application Insights
             services.AddApplicationInsightsTelemetry(Configuration);
 

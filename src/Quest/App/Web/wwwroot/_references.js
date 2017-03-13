@@ -1,6 +1,7 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="js/app.js" />
 /// <reference path="js/common/formelement.dir.js" />
+/// <reference path="js/common/logger/appinsightslogger.svc.js" />
 /// <reference path="js/common/paginate.filter.js" />
 /// <reference path="js/common/pagination.dir.js" />
 /// <reference path="js/common/proxy.svc.js" />

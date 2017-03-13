@@ -1,6 +1,6 @@
 ﻿(function (module) {
 
-    var dashboardCtrl = function ($scope, $location, questionsData, categories) {
+    var dashboardCtrl = function ($scope, $location, questionsData, appInsightsLogger, categories) {
 
         $scope.userId = "pratikb@microsoft.com";
         $scope.questions = [];
@@ -56,6 +56,8 @@
         }
 
         var init = function () {
+            appInsightsLogger.logView("dashboard", "/dashboard");
+
             $scope.getUserQuestions = getUserQuestions;
             $scope.changeOrder = changeOrder;
             $scope.getUserQuestions();
