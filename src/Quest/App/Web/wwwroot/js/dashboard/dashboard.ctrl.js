@@ -1,6 +1,6 @@
 ﻿(function (module) {
 
-    var dashboardCtrl = function ($scope, questionsData, categories) {
+    var dashboardCtrl = function ($scope, $location, questionsData, categories) {
 
         $scope.userId = "pratikb@microsoft.com";
         $scope.questions = [];
@@ -51,10 +51,15 @@
                 });
         }
 
+        var addNewQuestion = function () {
+            $location.path("shell/questions/add");
+        }
+
         var init = function () {
             $scope.getUserQuestions = getUserQuestions;
             $scope.changeOrder = changeOrder;
             $scope.getUserQuestions();
+            $scope.addNewQuestion = addNewQuestion;
         }
         init();
     }

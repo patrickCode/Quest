@@ -3,10 +3,10 @@ angular.module("metadata", ["common"]);
 angular.module("question", ["common"]);
 angular.module("dashboard", ["common", "question"]);
 
-angular.module("quest", ["ui.router", "common", "metadata", "question", "dashboard"])
+angular.module("quest", ["ui.router", "ngMessages", "common", "metadata", "question", "dashboard"])
     .config([
-        '$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider', 'categoriesDataProvider',
-        function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, categoriesData) {
+        '$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider', 'categoriesDataProvider', 'questionTypesDataProvider', 'answerTypesDataProvider', 'difficultyLevelsDataProvider',
+        function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, categoriesData, questionTypesData, answerTypesData, difficultyLevelsData) {
 
             $urlRouterProvider
                 .otherwise("/shell/dashboard");
@@ -30,7 +30,18 @@ angular.module("quest", ["ui.router", "common", "metadata", "question", "dashboa
                     .state("questions", {
                         parent: "shell",
                         url: "/questions",
-                        templateUrl: "templates/questions/questionsShell.html"
+                        templateUrl: "templates/questions/questionsShell.html",
+                        resolve: {
+                            questionTypes: function (questionTypesData) {
+                                return questionTypesData.getAllQuestionTypes();
+                            },
+                            answerTypes: function (answerTypesData) {
+                                return answerTypesData.getAllAnswerTypes();
+                            },
+                            difficultyLevels: function (difficultyLevelsData) {
+                                return difficultyLevelsData.getAllDifficultyLevels();
+                            }
+                        }
                     })
                         .state("add", {
                             parent: "questions",

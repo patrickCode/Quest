@@ -14,6 +14,7 @@
                             <option ng-repeat="category in availableCategories" value="{{category.code}}">{{category.value}}</option>
                         </select>
                         <input id="searchText" class="form-control" type="text" style="width: 300px;" placeholder="Search..." ng-disabled="questionsLoading || errorOcurredWhileLoadingQuestions" ng-model="searchText" />
+                        <button class="btn btn-danger" ng-click="addNewQuestion()">+</button>
                     </form>
                 </div>
             </div>

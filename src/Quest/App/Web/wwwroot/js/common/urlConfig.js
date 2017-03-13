@@ -1,13 +1,15 @@
 ﻿(function (module) {
 
     var urlConfig = function () {
-        var baseUrl = "http://questhunt.azurewebsites.net/api/";
+        var baseUrl = "api/";
 
         //Questions
         var questionsByUserIdUrl = "users/{userId}/questions";
         var questionsByUserId = function (userId) {
             return baseUrl + (questionsByUserIdUrl.replace("{userId}", userId));
         }
+
+        var addNewQuestionUrl = baseUrl + "questions";
 
         //Metadata
         var getAllCategoriesUrl = baseUrl + "categories";
@@ -18,6 +20,8 @@
 
         return {
             questionsByUserId: questionsByUserId,
+            addNewQuestion: addNewQuestionUrl,
+
             getAllCategories: getAllCategoriesUrl,
             getAllQuestionTypes: getAllQuestionTypesUrl,
             getAllAnswerTypes: getAllAnswerTypesUrl,
