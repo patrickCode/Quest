@@ -56,7 +56,7 @@
         }
 
         var init = function () {
-            appInsightsLogger.logView("dashboard", "/dashboard");
+            appInsightsLogger.logView("Dashboard", "/dashboard");
 
             $scope.getUserQuestions = getUserQuestions;
             $scope.changeOrder = changeOrder;
