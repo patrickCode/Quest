@@ -7,6 +7,8 @@ namespace Services.QuestionServices.QueryServices
 {
     public interface IQuestionsQueryService: IQueryService<QuestionDto>
     {
+        QuestionDto GetQuestionByValue(string questionName);
+        Task<QuestionDto> GetQuestionByValueAsync(string questionName);
         List<QuestionDto> GetByCategory(string category);
         Task<List<QuestionDto>> GetByCategoryAsync(string category);
         List<QuestionDto> GetByUser(string userAlias);
