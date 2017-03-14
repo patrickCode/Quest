@@ -1,13 +1,27 @@
 ﻿(function (module) {
 
-    var viewQuestionCtrl = function ($scope, $location, $stateParams, questionsData, appInsightsLogger, categories, questionTypes, answerTypes, difficultyLevels) {
+    var viewQuestionCtrl = function ($scope, $location, $stateParams, questionsData, confirmQuestionDeletion, appInsightsLogger, categories, questionTypes, answerTypes, difficultyLevels) {
         $scope.questionId = null;
         $scope.question = null;
         $scope.questionLoading = false;
         $scope.errorOcurred = false;
         $scope.errorMessage = null;
 
+        $scope.deletingQuestion = false;
+
         var deleteQuestion = function () {
+            confirmQuestionDeletion($scope.question)
+                .then(function () {
+                    $scope.deletingQuestion = true;
+                    questionsData.deleteQuestion($scope.question.id)
+                        .then(function () {
+                            $scope.deletingQuestion = false;
+                            $location.path("shell/dashboard");
+                        })
+                        .catch(function (exception) {
+                            alert(exception);
+                        });
+                });
 
         }
 

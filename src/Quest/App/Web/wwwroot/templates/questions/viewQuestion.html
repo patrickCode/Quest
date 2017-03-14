@@ -6,12 +6,18 @@
                 Loading
             </button>
         </div>
+        <div class="panel-body" ng-if="deletingQuestion">
+            <button class="btn btn-lg btn-warning disabled align-middle">
+                <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                Deleting
+            </button>
+        </div>
         <div class="panel-body" ng-if="errorOcurred && !questionLoading">
             <label class="label label-danger">
                 {{errorMessage}}
             </label>
         </div>
-        <div class="panel-body" ng-if="question !== undefined && question !== null && question !== {}">
+        <div class="panel-body" ng-if="question !== undefined && question !== null && question !== {} &&!deletingQuestion">
             <h3>
                 {{::question.value}}
                 <i class="glyphicon glyphicon-edit" style="margin-left:20px;"></i>
@@ -60,7 +66,7 @@
                     <i class="glyphicon glyphicon-edit"></i>
                     Edit
                 </button>
-                <button type="button" class="btn btn-primary" ng-disabled="true" ng-click="deleteQuestion()">
+                <button type="button" class="btn btn-primary" ng-click="deleteQuestion()">
                     <i class="glyphicon glyphicon-trash"></i>
                     Delete
                 </button>

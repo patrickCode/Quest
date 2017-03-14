@@ -52,8 +52,21 @@
             question.lastModifedOn = today;
 
             var str = JSON.stringify(question);
-            
+
             proxy.post(url, question)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (error) {
+                    deferred.reject(error);
+                });
+            return deferred.promise;
+        }
+
+        var deleteQuestion = function (questionId) {
+            var url = urlConfig.deleteQuestion(questionId);
+            var deferred = $q.defer();
+
+            proxy.del(url)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (error) {
@@ -66,7 +79,8 @@
             getUserQuestions: getUserQuestions,
             getQuestionByValue: getQuestionByValue,
             getQuestionById: getQuestionById,
-            addQuestion: addQuestion
+            addQuestion: addQuestion,
+            deleteQuestion: deleteQuestion
         }
     }
 

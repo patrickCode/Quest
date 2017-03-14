@@ -1,6 +1,6 @@
 ﻿(function (module) {
 
-    var dashboardCtrl = function ($scope, $location, questionsData, appInsightsLogger, categories) {
+    var dashboardCtrl = function ($scope, $location, questionsData, confirmQuestionDeletion, appInsightsLogger, categories) {
 
         $scope.userId = "pratikb@microsoft.com";
         $scope.questions = [];
@@ -55,7 +55,24 @@
             $location.path("shell/questions/add");
         }
 
-        var showDetails = function(question) {
+        var deleteQuestion = function ($event, question) {
+            $event.stopPropagation();
+            confirmQuestionDeletion(question)
+                .then(function () {
+                    question.deletingQuestion = true;
+                    questionsData.deleteQuestion($scope.question.id)
+                        .then(function () {
+                            question.deletingQuestion = false;
+                            getUserQuestions();
+                        })
+                        .catch(function (exception) {
+                            alert(exception);
+                        });
+                });
+
+        }
+
+        var showDetails = function (question) {
             var id = question.id;
             var detailsPath = "shell/questions/" + id + "/view";
             $location.path(detailsPath);
@@ -69,6 +86,7 @@
             $scope.getUserQuestions();
             $scope.addNewQuestion = addNewQuestion;
             $scope.showDetails = showDetails;
+            $scope.deleteQuestion = deleteQuestion;
         }
         init();
     }
