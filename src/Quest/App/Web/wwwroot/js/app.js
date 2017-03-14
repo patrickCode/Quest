@@ -26,17 +26,6 @@ angular.module("quest", ["ui.router", "common", "metadata", "question", "dashboa
                         url: "/dashboard",
                         templateUrl: "templates/dashboard/dashboard.html",
                         controller: "dashboardCtrl"
-                    })
-                    .state("questions", {
-                        parent: "shell",
-                        url: "/questions",
-                        templateUrl: "templates/questions/questionsShell.html"
-                    })
-                        .state("add", {
-                            parent: "questions",
-                            url: "/add",
-                            templateUrl: "templates/questions/addQuestion.html",
-                            controller: "addQuestionCtrl"
-                        });
+                    });
         }
     ]);
