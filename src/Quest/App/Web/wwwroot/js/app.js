@@ -3,7 +3,7 @@ angular.module("metadata", ["common"]);
 angular.module("question", ["common"]);
 angular.module("dashboard", ["common", "question"]);
 
-angular.module("quest", ["ui.router", "ngMessages", "ui.bootstrap", "common", "metadata", "question", "dashboard"])
+angular.module("quest", ["ui.router", "ngMessages", "ui.bootstrap", "ui.toggle", "common", "metadata", "question", "dashboard"])
     .config([
         '$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider', 'categoriesDataProvider', 'questionTypesDataProvider', 'answerTypesDataProvider', 'difficultyLevelsDataProvider',
         function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, categoriesData, questionTypesData, answerTypesData, difficultyLevelsData) {

@@ -27,6 +27,7 @@
 /// <reference path="js/site.min.js" />
 /// <reference path="lib/angular/angular.js" />
 /// <reference path="lib/angular-bootstrap/ui-bootstrap-tpls.js" />
+/// <reference path="lib/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.js" />
 /// <reference path="lib/angular-messages/angular-messages.js" />
 /// <reference path="lib/angular-ui-router/release/angular-ui-router.js" />
 /// <reference path="lib/bootstrap/dist/js/bootstrap.js" />

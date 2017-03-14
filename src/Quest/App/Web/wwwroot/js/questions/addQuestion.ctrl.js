@@ -16,7 +16,8 @@
             "lastModifiedBy": null,
             "lastModifedOn": null,
             "mediaUrl": null,
-            "id": null
+            "id": null,
+            "isPrivate": false
         };
 
         $scope.addingQuestion = false;

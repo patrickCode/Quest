@@ -10,6 +10,7 @@
     "angular-ui-router": "0.4.2",
     "underscore": "1.8.3",
     "angular-messages": "1.6.3",
-    "angular-bootstrap": "2.5.0"
+    "angular-bootstrap": "2.5.0",
+    "angular-bootstrap-toggle": "0.1.2"
   }
 }

@@ -31,8 +31,10 @@
             <small>
                 <i class="glyphicon glyphicon-calendar" style="margin-right: 10px;"></i>
                 {{::question.lastModifedOn | date:'short'}} /
-                {{::question.lastModifiedBy}}
-            </small>
+                {{::question.lastModifiedBy}} /
+            </small> 
+            <label ng-hide="question.isPrivate" class="label label-success">Public</label>
+            <label ng-show="question.isPrivate" class="label label-danger">Private</label>
             <br />
             <div>
                 <h4>Answer</h4>

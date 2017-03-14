@@ -65,7 +65,10 @@
             </thead>
             <tbody>
                 <tr ng-repeat="question in filteredQuestions = (questions | questionsCategoryFilter:selectedCategory | filter:searchText | orderBy:orderOn:orderByDesc) | paginate:pagination.currentPage:pagination.pageSize" style="cursor:pointer;" ng-click="showDetails(question)">
-                    <td>{{question.value}}</td>
+                    <td>
+                        {{question.value}}
+                        <label ng-show="question.isPrivate" class="label label-danger">Private</label>
+                    </td>
                     <td><question-type question-type-code="{{question.questionTypeCode}}"></td>
                     <td><answer-type answer-type-code="{{question.answerTypeCode}}"></td>
                     <td>{{question.correctAnswer | limitTo:20}}<span ng-show="question.correctAnswer.length > 20">...</span></td>

@@ -1,10 +1,10 @@
 ﻿(function (module) {
     var setupDom = function (element) {
-        var inputElement = element.querySelector("input, textarea, select, level-rating");
+        var inputElement = element.querySelector("input, textarea, select, toggle");
         if (inputElement === null)
             return;
         var inputType = inputElement.getAttribute("type");
-        if (inputType !== "checkbox" && inputType !== "radio") {
+        if (inputType !== "checkbox" && inputType !== "radio" && inputType !== "toggle") {
             inputElement.classList.add("form-control");
         }
 
@@ -15,11 +15,11 @@
     }
 
     var getInputElement = function (element) {
-        return element.querySelector("input, textarea, select");;
+        return element.querySelector("input, textarea, select, toggle");;
     }
 
     var getElementName = function (element) {
-        var inputElement = element.querySelector("input, textarea, select");
+        var inputElement = element.querySelector("input, textarea, select, toggle");
         if (inputElement === null)
             return null;
         var elementName = inputElement.getAttribute("name");
@@ -37,7 +37,7 @@
 
     var updateInvalidateInput = function (element) {
         return function (isInvalid) {
-            var inputElement = element[0].querySelector("input, textarea, select");
+            var inputElement = element[0].querySelector("input, textarea, select, toggle");
             if (isInvalid) {
                 inputElement.classList.add("has-error");
             }
