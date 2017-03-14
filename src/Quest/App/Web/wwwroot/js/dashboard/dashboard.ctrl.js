@@ -60,7 +60,7 @@
             confirmQuestionDeletion(question)
                 .then(function () {
                     question.deletingQuestion = true;
-                    questionsData.deleteQuestion($scope.question.id)
+                    questionsData.deleteQuestion(question.id)
                         .then(function () {
                             question.deletingQuestion = false;
                             getUserQuestions();
