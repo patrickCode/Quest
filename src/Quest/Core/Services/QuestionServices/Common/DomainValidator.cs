@@ -46,6 +46,12 @@ namespace Services.QuestionServices.Common
                 throw new DomainValidationException(trackingGuid, "Wrong Difficulty Level", 9);
             question.SetDifficultyLevel(difficultLevel);
 
+            //Visibility
+            if (questionDocument.IsPrivate)
+                question.MakePrivate();
+            else
+                question.MakePublic();
+
             //TODO: Check if category code exisits
             //Categorize
             if (questionDocument.Categories == null || !questionDocument.Categories.Any())

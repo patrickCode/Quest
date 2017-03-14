@@ -122,6 +122,15 @@ namespace Domain.Questions.Aggregate
             }
         }
 
+        private bool _isPrivate;
+        public bool IsPrivate
+        {
+            get
+            {
+                return _isPrivate;
+            }
+        }
+
         public void Save(string questionId, string user)
         {
             _id = questionId;
@@ -131,6 +140,16 @@ namespace Domain.Questions.Aggregate
         public void DeleteQuestion()
         {
 
+        }
+
+        public void MakePrivate()
+        {
+            _isPrivate = true;
+        }
+
+        public void MakePublic()
+        {
+            _isPrivate = false;
         }
 
         public void Update(string questionId, string originalUser, DateTime createdOn, string currentUser)

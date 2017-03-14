@@ -21,6 +21,7 @@ namespace Common.Model
         public string LastModifiedBy { get; set; }
         public DateTime LastModifedOn { get; set; }
         public string MediaUrl { get; set; }
+        public bool IsPrivate { get; set; }
         public override string ToString()
         {
             return JsonConvert.SerializeObject(this);
