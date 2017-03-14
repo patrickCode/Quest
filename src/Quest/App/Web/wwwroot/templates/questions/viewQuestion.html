@@ -12,15 +12,21 @@
                 Deleting
             </button>
         </div>
-        <div class="panel-body" ng-if="errorOcurred && !questionLoading">
+        <div class="panel-body" ng-if="editingQuestion">
+            <button class="btn btn-lg btn-warning disabled align-middle">
+                <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                Updating Question
+            </button>
+        </div>
+        <div class="panel-body" ng-if="errorOcurred && !questionLoading && !editingQuestion">
             <label class="label label-danger">
                 {{errorMessage}}
             </label>
         </div>
-        <div class="panel-body" ng-if="question !== undefined && question !== null && question !== {} &&!deletingQuestion">
+        <div class="panel-body" ng-if="question !== undefined && question !== null && question !== {} && !deletingQuestion && !editingQuestion">
             <h3>
-                {{::question.value}}
-                <i class="glyphicon glyphicon-edit" style="margin-left:20px;"></i>
+                {{question.value}}
+                <i class="glyphicon glyphicon-edit" style="margin-left:20px; cursor:pointer" ng-click="editQuestionText()"></i>
             </h3>
             <small>
                 <i class="glyphicon glyphicon-calendar" style="margin-right: 10px;"></i>
@@ -30,7 +36,10 @@
             <br />
             <div>
                 <h4>Answer</h4>
-                <span>{{::question.correctAnswer}}</span>
+                <span>
+                    {{question.correctAnswer}}
+                    <i class="glyphicon glyphicon-edit" style="margin-left:20px; cursor:pointer" ng-click="editAnswerText()"></i>
+                </span>
             </div>
 
             <br />
@@ -39,7 +48,7 @@
                 <level index="question.difficultLevel" only-title="false">
             </div>
 
-            <br/>
+            <br />
             <div class="col-md-6">
                 <h4>Question Type</h4>
                 <question-type question-type-code="{{question.questionTypeCode}}" only-icon="false">

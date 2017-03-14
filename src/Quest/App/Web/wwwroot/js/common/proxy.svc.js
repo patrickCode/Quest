@@ -29,7 +29,7 @@
         }
 
         this.put = function (url, data, headers) {
-            return request(url, "POST", headers, data);
+            return request(url, "PUT", headers, data);
         }
 
         this.del = function (url, headers) {

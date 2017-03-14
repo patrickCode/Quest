@@ -51,9 +51,25 @@
             question.createdOn = today;
             question.lastModifedOn = today;
 
-            var str = JSON.stringify(question);
-
             proxy.post(url, question)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (error) {
+                    deferred.reject(error);
+                });
+            return deferred.promise;
+        }
+
+        var editQuestion = function (question) {
+            var url = urlConfig.editQuestion;
+            var deferred = $q.defer();
+
+            //Audit
+            question.lastModifiedBy = "pratikb@microsoft.com";
+            var today = new Date();
+            question.lastModifedOn = today;
+
+            proxy.put(url, question)
                 .then(function (response) {
                     deferred.resolve(response.data);
                 }, function (error) {
@@ -80,6 +96,7 @@
             getQuestionByValue: getQuestionByValue,
             getQuestionById: getQuestionById,
             addQuestion: addQuestion,
+            editQuestion: editQuestion,
             deleteQuestion: deleteQuestion
         }
     }

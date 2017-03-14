@@ -1,6 +1,6 @@
 ﻿(function (module) {
 
-    var viewQuestionCtrl = function ($scope, $location, $stateParams, questionsData, confirmQuestionDeletion, appInsightsLogger, categories, questionTypes, answerTypes, difficultyLevels) {
+    var viewQuestionCtrl = function ($scope, $location, $stateParams, questionsData, confirmQuestionDeletion, editText, appInsightsLogger, categories, questionTypes, answerTypes, difficultyLevels) {
         $scope.questionId = null;
         $scope.question = null;
         $scope.questionLoading = false;
@@ -8,6 +8,7 @@
         $scope.errorMessage = null;
 
         $scope.deletingQuestion = false;
+        $scope.editingQuestion = false;
 
         var deleteQuestion = function () {
             confirmQuestionDeletion($scope.question)
@@ -27,6 +28,40 @@
 
         var editQuestion = function () {
 
+        }
+
+        var editQuestionText = function () {
+            editText("Edit Question", "Question", $scope.question.value)
+                .then(function (updatedQuestion) {
+                    $scope.editingQuestion = true;
+                    $scope.question.value = updatedQuestion;
+                    questionsData.editQuestion($scope.question)
+                        .then(function (data) {
+                            $scope.editingQuestion = false;
+                        })
+                        .catch(function (exception) {
+                            $scope.editingQuestion = false;
+                            $scope.errorOcurred = true;
+                            alert(exception);
+                        });
+                })
+        }
+
+        var editAnswerText = function () {
+            editText("Edit Answer", "Answer", $scope.question.correctAnswer)
+                .then(function (updatedAnswer) {
+                    $scope.editingQuestion = true;
+                    $scope.question.correctAnswer = updatedAnswer;
+                    questionsData.editQuestion($scope.question)
+                        .then(function (data) {
+                            $scope.editingQuestion = false;
+                        })
+                        .catch(function (exception) {
+                            $scope.editingQuestion = false;
+                            $scope.errorOcurred = true;
+                            alert(exception);
+                        });
+                })
         }
 
         var getSubCategories = function (categoryCode) {
@@ -60,6 +95,8 @@
             $scope.deleteQuestion = deleteQuestion;
             $scope.editQuestion = editQuestion;
             $scope.getQuestion = getQuestion;
+            $scope.editQuestionText = editQuestionText;
+            $scope.editAnswerText = editAnswerText;
             $scope.getSubCategories = getSubCategories;
 
             $scope.questionId = $stateParams.id;

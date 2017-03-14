@@ -30,6 +30,7 @@
             addNewQuestion: addNewQuestionUrl,
             getQuestionByValue: getQuestionByValue,
             getQuestionById: getQuestionById,
+            editQuestion: addNewQuestionUrl,
             deleteQuestion: getQuestionById,
 
             getAllCategories: getAllCategoriesUrl,
