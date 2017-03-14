@@ -46,6 +46,16 @@ namespace Services.QuestionServices.QueryServices
             return await _reader.GetAsync(id);
         }
 
+        public QuestionDto GetQuestionByValue(string question)
+        {
+            return Get(ques => ques.Value.Equals(question)).FirstOrDefault();
+        }
+
+        public async Task<QuestionDto> GetQuestionByValueAsync(string question)
+        {
+            return (await GetAsync(ques => ques.Value.Equals(question))).FirstOrDefault();
+        }
+
         public List<QuestionDto> GetByCategory(string category)
         {
             return Get(question => question.Categories.Any(ctg => ctg.Value.Equals(category)));

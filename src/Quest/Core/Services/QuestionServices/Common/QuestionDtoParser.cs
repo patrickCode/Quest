@@ -29,7 +29,7 @@ namespace Services.QuestionServices.Common
         }
 
         private IEnumerable<Category> GetCategories(Question question)
-        {
+        {   
             foreach(var category in question.Categories)
             {
                 var categoryDto = new Category()
@@ -38,12 +38,15 @@ namespace Services.QuestionServices.Common
                     Value = category.Value
                 };
                 if (category.SubCategories == null || !category.SubCategories.Any())
+                {
                     yield return categoryDto;
+                    continue;
+                }
 
-                categoryDto.SubCatgories = new List<SubCategory>();
+                categoryDto.SubCategories = new List<SubCategory>();
                 category.SubCategories.ForEach(subCategory =>
                 {
-                    categoryDto.SubCatgories.Add(new SubCategory()
+                    categoryDto.SubCategories.Add(new SubCategory()
                     {
                         Code = subCategory.Code,
                         Value = subCategory.Value

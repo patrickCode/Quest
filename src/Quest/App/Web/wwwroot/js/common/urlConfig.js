@@ -1,12 +1,21 @@
 ﻿(function (module) {
 
     var urlConfig = function () {
-        var baseUrl = "http://questhunt.azurewebsites.net/api/";
+        var baseUrl = "api/";
 
         //Questions
         var questionsByUserIdUrl = "users/{userId}/questions";
         var questionsByUserId = function (userId) {
             return baseUrl + (questionsByUserIdUrl.replace("{userId}", userId));
+        }
+        var getQuestionByIdUrl = "questions/{id}";
+        var getQuestionById = function (id) {
+            return baseUrl + (getQuestionByIdUrl.replace("{id}", id));
+        }
+        var addNewQuestionUrl = baseUrl + "questions";
+        var getQuestionByValueUrl = "questions/{value}?type=question"
+        var getQuestionByValue = function (value) {
+            return baseUrl + (getQuestionByValueUrl.replace("{value}", value));
         }
 
         //Metadata
@@ -18,6 +27,10 @@
 
         return {
             questionsByUserId: questionsByUserId,
+            addNewQuestion: addNewQuestionUrl,
+            getQuestionByValue: getQuestionByValue,
+            getQuestionById: getQuestionById,
+
             getAllCategories: getAllCategoriesUrl,
             getAllQuestionTypes: getAllQuestionTypesUrl,
             getAllAnswerTypes: getAllAnswerTypesUrl,

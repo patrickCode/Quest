@@ -1,0 +1,149 @@
+﻿<div class="container">
+    <div class="row">
+        <h4 style="text-align: center">Add A New Question</h4>
+
+        <span ng-show="addingQuestion">
+            <button class="btn btn-lg btn-warning disabled align-middle">
+                <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+                Adding Question...
+            </button>
+        </span>
+
+        <form ng-hide="addingQuestion" name="questionForm" class="form-horizontal" ng-submit="addQuestion()">
+            <!--Question-->
+            <div form-element>
+                <label class="col-xs-2" for="question">Question</label>
+                <div class="col-xs-10">
+                    <textarea type="text" id="question" name="question" placeholder="Enter the question here" ng-model="question.value" required dup-question ng-model-options="{updateOn: 'default blur', debounce: {'default': 1500, 'blur': 0}}" />
+                    <div ng-if="questionForm.question.$pending">Checking Question <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span></div>
+                </div>
+            </div>
+
+            <!--Question Type-->
+            <div form-element>
+                <label for="questiontype" class="col-xs-2">Question Type</label>
+                <div class="col-xs-6">
+                    <select id="questiontype" name="questiontype" ng-model="question.questionTypeCode" required>
+                        <option ng-repeat="questionType in questionTypes" value="{{questionType.code}}">{{questionType.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--Media Clip URL-->
+            <div form-element ng-if="question.questionTypeCode !== null && question.questionTypeCode !== 'TXT'">
+                <label for="mediaClip" class="col-xs-2">Media Clip</label>
+                <div class="col-xs-10">
+                    <input type="url" id="mediaClip" name="mediaClip" placeholder="Enter the Media Clip URL" ng-model="question.mediaUrl" required>
+                </div>
+            </div>
+
+            <!--Answer-->
+            <div form-element>
+                <label for="answer" class="col-xs-2">Answer</label>
+                <div class="col-xs-10">
+                    <textarea id="answer" name="answer" placeholder="Enter the correct answer here" ng-model="question.correctAnswer" required></textarea>
+                </div>
+            </div>
+
+            <!--Answer Type-->
+            <div form-element>
+                <label for="answertype" class="col-xs-2">Answer Type</label>
+                <div class="col-xs-6">
+                    <select id="answertype" name="answertype" ng-model="question.answerTypeCode" required>
+                        <option ng-repeat="answerType in answerTypes" value="{{answerType.code}}">{{answerType.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--Options-->
+            <div ng-if="question.answerTypeCode === 'MCQ'">
+                <div form-element>
+                    <label for="options1" class="col-xs-2">Option 1</label>
+                    <div class="col-xs-10">
+                        <input type="text" id="options1" name="options1" placeholder="Enter option 1" ng-model="question.options[0]" required />
+                    </div>
+                </div>
+                <div form-element>
+                    <label for="options2" class="col-xs-2">Option 2</label>
+                    <div class="col-xs-10">
+                        <input type="text" id="option2" name="option2" placeholder="Enter option 2" ng-model="question.options[1]" />
+                    </div>
+                </div>
+                <div form-element>
+                    <label for="options3" class="col-xs-2">Option 3</label>
+                    <div class="col-xs-10">
+                        <input type="text" id="options3" name="options3" placeholder="Enter option 3" ng-model="question.options[2]" />
+                    </div>
+                </div>
+            </div>
+
+            <!--Categories-->
+            <!--Category 1-->
+            <div form-element>
+                <label for="category1" class="col-xs-2">Category 1</label>
+                <div class="col-xs-4">
+                    <select id="category1" name="category1" ng-model="selectedCategories[0].category" required>
+                        <option ng-repeat="category in categories" value="{{category.code}}">{{category.name}}</option>
+                    </select>
+                </div>
+                <div form-element>
+                    <label for="subcategory1" class="col-xs-2">Sub-Category</label>
+                    <div class="col-xs-4">
+                        <select id="subcategory1" name="subcategory1" ng-model="selectedCategories[0].subCategory" ng-disabled="selectedCategories[0].category === undefined || selectedCategories[0].category === null">
+                            <option ng-repeat="subcategory in getSubCategories(selectedCategories[0].category)" value="{{subcategory.code}}">{{subcategory.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Category 2-->
+            <div form-element>
+                <label for="category2" class="col-xs-2">Category 2</label>
+                <div class="col-xs-4">
+                    <select id="category2" name="category2" ng-model="selectedCategories[1].category">
+                        <option ng-repeat="category in categories" value="{{category.code}}">{{category.name}}</option>
+                    </select>
+                </div>
+                <div form-element>
+                    <label for="subcategory2" class="col-xs-2">Sub-Category</label>
+                    <div class="col-xs-4">
+                        <select id="subcategory2" name="subcategory2" ng-model="selectedCategories[1].subCategory" ng-disabled="selectedCategories[1].category === undefined || selectedCategories[1].category === null">
+                            <option ng-repeat="subcategory in getSubcategories(selectedCategories[1].category)" value="{{subcategory.code}}">{{subcategory.name}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!--Level-->
+            <div form-element>
+                <label for="level" class="col-xs-2">Difficulty Level</label>
+                <div class="col-xs-6">
+                    <select id="level" name="level" ng-model="question.difficultLevel" required>
+                        <option ng-repeat="level in difficultyLevels" value="{{level.levelIndex}}">{{level.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--Tags-->
+            <div form-element>
+                <label for="tags" class="col-xs-2">Tags</label>
+                <div class="col-xs-10">
+                    <textarea name="tags" id="tags" placeholder="Enter tags for the question here" ng-model="tags" dup-tag></textarea>
+                </div>
+            </div>
+
+            <div>
+                <div class="btn-group-justified">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-3">
+                        <button type="submit" name="submitButton" class="btn btn-primary" ng-disabled="questionForm.$invalid">Submit</button>
+                    </div>
+                    <div class="col-lg-3">
+                        <button type="reset" name="resetButton" class="btn btn-primary">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

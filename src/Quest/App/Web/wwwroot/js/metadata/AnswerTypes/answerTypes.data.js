@@ -17,13 +17,26 @@
             var url = urlConfig.getAllAnswerTypes;
             proxy.get(url)
                 .then(function (response) {
-                    cacheAnswerTypes(response.data);
-                    deferred.resolve(response.data);
+                    var answerTypes = response.data;
+                    if (answerTypes !== undefined && answerTypes !== null) {
+                        setAnswerTypeIcons(answerTypes);
+                        cacheAnswerTypes(answerTypes);
+                        deferred.resolve(answerTypes);
+                    } else {
+                        deferred.reject("Not Found");
+                    }
                 }, function (error) {
                     deferred.reject(error);
                 });
 
             return deferred.promise;
+        }
+
+        var getAnswerTypeByCode = function (code) {
+            var answerTypes = getAllCachedAnswerTypes();
+            if (answerTypes !== undefined || answerTypes !== null) {
+                return _.findWhere(answerTypes, { code: code });
+            }
         }
 
         var cacheAnswerTypes = function (answerTypes) {
@@ -34,9 +47,25 @@
             return sharedContext.getValue("key-answerTypes");
         }
 
+        var setAnswerTypeIcons = function (answerTypes) {
+            _.forEach(answerTypes, function (answerType) {
+                var iconClass = getAnswerTypeIconClass(answerType.code);
+                answerType.iconClass = iconClass;
+            });
+        }
+
+        var getAnswerTypeIconClass = function (code) {
+            switch (code) {
+                case 'SUB': return "glyphicon-pencil";
+                case 'MCQ': return "glyphicon-list-alt";
+                default: return "";
+            }
+        }
+
         return {
             getAllAnswerTypes: getAllAnswerTypes,
-            getAllCachedAnswerTypes: getAllCachedAnswerTypes
+            getAllCachedAnswerTypes: getAllCachedAnswerTypes,
+            getAnswerTypeByCode: getAnswerTypeByCode
         }
 
     }

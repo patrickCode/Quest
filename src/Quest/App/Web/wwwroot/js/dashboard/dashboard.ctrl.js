@@ -1,6 +1,6 @@
 ﻿(function (module) {
 
-    var dashboardCtrl = function ($scope, questionsData, categories) {
+    var dashboardCtrl = function ($scope, $location, questionsData, appInsightsLogger, categories) {
 
         $scope.userId = "pratikb@microsoft.com";
         $scope.questions = [];
@@ -15,7 +15,7 @@
 
         $scope.pagination = {
             currentPage: 1,
-            pageSize: 3
+            pageSize: 10
         };
 
         $scope.totalCount = 0;
@@ -51,10 +51,24 @@
                 });
         }
 
+        var addNewQuestion = function () {
+            $location.path("shell/questions/add");
+        }
+
+        var showDetails = function(question) {
+            var id = question.id;
+            var detailsPath = "shell/questions/" + id + "/view";
+            $location.path(detailsPath);
+        }
+
         var init = function () {
+            appInsightsLogger.logView("Dashboard", "/dashboard");
+
             $scope.getUserQuestions = getUserQuestions;
             $scope.changeOrder = changeOrder;
             $scope.getUserQuestions();
+            $scope.addNewQuestion = addNewQuestion;
+            $scope.showDetails = showDetails;
         }
         init();
     }

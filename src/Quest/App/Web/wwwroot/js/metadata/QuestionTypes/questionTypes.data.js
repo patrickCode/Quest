@@ -17,13 +17,27 @@
             var url = urlConfig.getAllQuestionTypes;
             proxy.get(url)
                 .then(function (response) {
-                    cacheQuestionTypes(response.data);
-                    deferred.resolve(response.data);
+                    var questionTypes = response.data;
+                    if (questionTypes !== undefined || questionTypes !== null) {
+                        setQuestionTypeIcons(questionTypes);
+                        cacheQuestionTypes(questionTypes);
+                        deferred.resolve(questionTypes);
+                    } else {
+                        deferred.reject("Not Found");
+                    }
+                    
                 }, function (error) {
                     deferred.reject(error);
                 });
 
             return deferred.promise;
+        }
+
+        var getQuestionTypeByCode = function (code) {
+            var questionTypes = getAllCachedQuestionTypes();
+            if (questionTypes !== undefined || questionTypes !== null) {
+                return _.findWhere(questionTypes, { code: code });
+            }
         }
 
         var cacheQuestionTypes = function (questionTypes) {
@@ -34,9 +48,27 @@
             return sharedContext.getValue("key-questionTypes");
         }
 
+        var setQuestionTypeIcons = function (questionTypes) {
+            _.forEach(questionTypes, function (questionType) {
+                var iconClass = getQuestionTypeIconClass(questionType.code);
+                questionType.iconClass = iconClass;
+            });
+        }
+
+        var getQuestionTypeIconClass = function (code) {
+            switch (code) {
+                case 'TXT': return "glyphicon-align-left";
+                case 'IMG': return "glyphicon-picture";
+                case 'AUD': return "glyphicon-volume-up";
+                case 'VID': return "glyphicon-film";
+                default: return "";
+            }
+        }
+
         return {
             getAllQuestionTypes: getAllQuestionTypes,
-            getAllCachedQuestionTypes: getAllCachedQuestionTypes
+            getAllCachedQuestionTypes: getAllCachedQuestionTypes,
+            getQuestionTypeByCode: getQuestionTypeByCode
         }
 
     }

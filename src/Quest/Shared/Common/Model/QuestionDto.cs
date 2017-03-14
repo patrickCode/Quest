@@ -55,7 +55,7 @@ namespace Common.Model
         public Category() { }
         public string Value { get; set; }
         public string Code { get; set; }
-        public List<SubCategory> SubCatgories { get; set; }
+        public List<SubCategory> SubCategories { get; set; }
 
     }
     public class SubCategory

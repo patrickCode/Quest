@@ -154,7 +154,7 @@ namespace Azure.DocumentDb.Tests.FunctionalTest
                     {
                         Value = "Angular.JS 1.0",
                         Code = "NG",
-                        SubCatgories = new List<SubCategory>()
+                        SubCategories = new List<SubCategory>()
                         {
                             new SubCategory()
                             {

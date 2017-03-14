@@ -1,23 +1,17 @@
 ﻿(function (module) {
 
-    var questionTypeDir = function () {
+    var questionTypeDir = function (questionTypesData) {
         return {
             restrict: "A/E",
             scope: {
-                questionTypeCode: "@"
+                questionTypeCode: "@",
+                onlyIcon: "@"
             },
-            template: "<span><i class = 'glyphicon' ng-class='iconClass'></i></span>",
+            templateUrl: "templates/metadata/questionTypes.dir.html",
             link: function (scope) {
-                var getQuestionTypeIconClass = function () {
-                    switch (scope.questionTypeCode) {
-                        case 'TXT': return "glyphicon-align-left";
-                        case 'IMG': return "glyphicon-picture";
-                        case 'AUD': return "glyphicon-volume-up";
-                        case 'VID': return "glyphicon-film";
-                        default: return "";
-                    }
-                }
-                scope.iconClass = getQuestionTypeIconClass();
+                scope.showText = scope.onlyIcon === "false";
+                scope.requiredQuestionType = questionTypesData.getQuestionTypeByCode(scope.questionTypeCode);
+                scope.tooltip = scope.requiredQuestionType.name + ": " + scope.requiredQuestionType.description;
             }
         }
     }

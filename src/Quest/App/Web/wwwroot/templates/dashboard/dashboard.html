@@ -14,6 +14,7 @@
                             <option ng-repeat="category in availableCategories" value="{{category.code}}">{{category.value}}</option>
                         </select>
                         <input id="searchText" class="form-control" type="text" style="width: 300px;" placeholder="Search..." ng-disabled="questionsLoading || errorOcurredWhileLoadingQuestions" ng-model="searchText" />
+                        <button class="btn btn-danger" ng-click="addNewQuestion()">+</button>
                     </form>
                 </div>
             </div>
@@ -61,7 +62,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="question in filteredQuestions = (questions | questionsCategoryFilter:selectedCategory | filter:searchText | orderBy:orderOn:orderByDesc) | paginate:pagination.currentPage:pagination.pageSize">
+                <tr ng-repeat="question in filteredQuestions = (questions | questionsCategoryFilter:selectedCategory | filter:searchText | orderBy:orderOn:orderByDesc) | paginate:pagination.currentPage:pagination.pageSize" style="cursor:pointer;" ng-click="showDetails(question)">
                     <td>{{question.value}}</td>
                     <td><question-type question-type-code="{{question.questionTypeCode}}"></td>
                     <td><answer-type answer-type-code="{{question.answerTypeCode}}"></td>

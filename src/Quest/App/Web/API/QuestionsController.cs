@@ -13,7 +13,7 @@ using Services.QuestionServices.QueryServices;
 namespace Web.API
 {
     [Route("api/questions")]
-    public class QuestionsController: Controller
+    public class QuestionsController : Controller
     {
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IQuestionsQueryService _questionsQueryService;
@@ -30,10 +30,12 @@ namespace Web.API
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public async Task<QuestionDto> Get(string id)
+        [Route("{identifier}")]
+        public async Task<QuestionDto> Get(string identifier, string type = "identifier")
         {
-            return await _questionsQueryService.GetAsync(id);
+            if (type.Equals("question"))
+                return await _questionsQueryService.GetQuestionByValueAsync(identifier);
+            return await _questionsQueryService.GetAsync(identifier);
         }
 
         [HttpGet]
@@ -71,7 +73,7 @@ namespace Web.API
                 Content = new StringContent(result.Identity)
             };
         }
-        
+
         [HttpDelete]
         [Route("{id}")]
         public async Task<HttpResponseMessage> DeleteQuestion(string id)

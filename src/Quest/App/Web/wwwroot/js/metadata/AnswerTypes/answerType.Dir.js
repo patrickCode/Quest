@@ -1,21 +1,17 @@
 ﻿(function (module) {
 
-    var answerTypeDir = function () {
+    var answerTypeDir = function (answerTypesData) {
         return {
             restrict: "A/E",
             scope: {
-                answerTypeCode: "@"
+                answerTypeCode: "@",
+                onlyIcon: "@"
             },
-            template: "<span><i class = 'glyphicon' ng-class='iconClass'></i></span>",
+            templateUrl: "templates/metadata/answerType.dir.html",
             link: function (scope) {
-                var getAnswerTypeIconClass = function () {
-                    switch (scope.answerTypeCode) {
-                        case 'SUB': return "glyphicon-pencil";
-                        case 'MCQ': return "glyphicon-list-alt";
-                        default: return "";
-                    }
-                }
-                scope.iconClass = getAnswerTypeIconClass();
+                scope.showText = scope.onlyIcon === "false";
+                scope.requiredAnswerType = answerTypesData.getAnswerTypeByCode(scope.answerTypeCode);
+                scope.tooltip = scope.requiredAnswerType.name + ": " + scope.requiredAnswerType.description;
             }
         }
     }
