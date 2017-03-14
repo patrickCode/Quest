@@ -20,6 +20,7 @@
 /// <reference path="js/questions/duptag.dir.js" />
 /// <reference path="js/questions/questions.data.js" />
 /// <reference path="js/questions/questionscategory.filter.js" />
+/// <reference path="js/questions/showquestion.ctrl.js" />
 /// <reference path="js/site.min.js" />
 /// <reference path="lib/angular/angular.js" />
 /// <reference path="lib/angular-messages/angular-messages.js" />

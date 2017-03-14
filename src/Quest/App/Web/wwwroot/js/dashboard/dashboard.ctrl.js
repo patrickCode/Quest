@@ -15,7 +15,7 @@
 
         $scope.pagination = {
             currentPage: 1,
-            pageSize: 3
+            pageSize: 10
         };
 
         $scope.totalCount = 0;
@@ -55,6 +55,12 @@
             $location.path("shell/questions/add");
         }
 
+        var showDetails = function(question) {
+            var id = question.id;
+            var detailsPath = "shell/questions/" + id + "/view";
+            $location.path(detailsPath);
+        }
+
         var init = function () {
             appInsightsLogger.logView("Dashboard", "/dashboard");
 
@@ -62,6 +68,7 @@
             $scope.changeOrder = changeOrder;
             $scope.getUserQuestions();
             $scope.addNewQuestion = addNewQuestion;
+            $scope.showDetails = showDetails;
         }
         init();
     }

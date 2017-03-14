@@ -61,7 +61,7 @@ namespace Services.CategoryServices.QueryServices
             var requiredCategory = (await _reader.QueryAsync(category => category.Code == categoryCode)).FirstOrDefault();
             if (requiredCategory == null)
                 throw new DomainValidationException(Guid.NewGuid(), "No Category exists by the given code", 18);
-            return requiredCategory.SubCatgories;
+            return requiredCategory.SubCategories;
         }
 
         public List<SubCategoryDto> GetSubCategoriesByCategoryCode(string categoryCode)
@@ -69,7 +69,7 @@ namespace Services.CategoryServices.QueryServices
             var requiredCategory = _reader.Query(category => category.Code == categoryCode).FirstOrDefault();
             if (requiredCategory == null)
                 throw new DomainValidationException(Guid.NewGuid(), "No Category exists by the given code", 18);
-            return requiredCategory.SubCatgories;
+            return requiredCategory.SubCategories;
         }
     }
 }

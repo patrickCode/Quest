@@ -41,7 +41,7 @@
 
             $scope.question.categories = _.map(acceptedCategoryCodes, function (categoryCode) {
                 var actualCategory = _.findWhere($scope.categories, { code: categoryCode.category });
-                var actualSubCategory = _.findWhere(actualCategory.subCatgories, { code: categoryCode.subCategory });
+                var actualSubCategory = _.findWhere(actualCategory.subCategories, { code: categoryCode.subCategory });
                 var addedCategory = {
                     value: actualCategory.name,
                     code: actualCategory.code,
@@ -60,7 +60,9 @@
             questionsData.addQuestion($scope.question)
                 .then(function (data) {
                     $scope.addingQuestion = false;
-                    $location.path("shell/dashboard");
+                    var questionId = data;
+                    var detailsUrl = "shell/questions/" + questionId + "/view";
+                    $location.path(detailsUrl);
                 }, function (error) {
                     $scope.addingQuestion = false;
                     $scope.errorOcurred = true;
@@ -69,10 +71,10 @@
                 });
         }
 
-        var getSubcategories = function (categoryCode) {
+        var getSubCategories = function (categoryCode) {
             if (categoryCode === undefined || categoryCode === null)
                 return [];
-            var subCategories = (_.findWhere(categories, { code: categoryCode })).subCatgories;
+            var subCategories = (_.findWhere(categories, { code: categoryCode })).subCategories;
             return subCategories;
         }
 
@@ -84,7 +86,7 @@
             $scope.answerTypes = answerTypes;
             $scope.difficultyLevels = difficultyLevels;
 
-            $scope.getSubcategories = getSubcategories;
+            $scope.getSubCategories = getSubCategories;
 
             $scope.addQuestion = addQuestion;
         }

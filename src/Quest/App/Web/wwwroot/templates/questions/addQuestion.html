@@ -90,7 +90,7 @@
                     <label for="subcategory1" class="col-xs-2">Sub-Category</label>
                     <div class="col-xs-4">
                         <select id="subcategory1" name="subcategory1" ng-model="selectedCategories[0].subCategory" ng-disabled="selectedCategories[0].category === undefined || selectedCategories[0].category === null">
-                            <option ng-repeat="subcategory in getSubcategories(selectedCategories[0].category)" value="{{subcategory.code}}">{{subcategory.name}}</option>
+                            <option ng-repeat="subcategory in getSubCategories(selectedCategories[0].category)" value="{{subcategory.code}}">{{subcategory.name}}</option>
                         </select>
                     </div>
                 </div>

@@ -18,6 +18,15 @@ angular.module("quest", ["ui.router", "ngMessages", "common", "metadata", "quest
                     resolve: {
                         categories: function (categoriesData) {
                             return categoriesData.getAllCategories();
+                        },
+                        questionTypes: function (questionTypesData) {
+                            return questionTypesData.getAllQuestionTypes();
+                        },
+                        answerTypes: function (answerTypesData) {
+                            return answerTypesData.getAllAnswerTypes();
+                        },
+                        difficultyLevels: function (difficultyLevelsData) {
+                            return difficultyLevelsData.getAllDifficultyLevels();
                         }
                     }
                 })
@@ -30,19 +39,14 @@ angular.module("quest", ["ui.router", "ngMessages", "common", "metadata", "quest
                     .state("questions", {
                         parent: "shell",
                         url: "/questions",
-                        templateUrl: "templates/questions/questionsShell.html",
-                        resolve: {
-                            questionTypes: function (questionTypesData) {
-                                return questionTypesData.getAllQuestionTypes();
-                            },
-                            answerTypes: function (answerTypesData) {
-                                return answerTypesData.getAllAnswerTypes();
-                            },
-                            difficultyLevels: function (difficultyLevelsData) {
-                                return difficultyLevelsData.getAllDifficultyLevels();
-                            }
-                        }
+                        templateUrl: "templates/questions/questionsShell.html"
                     })
+                        .state("view", {
+                            parent: "questions",
+                            url: "/{id}/view",
+                            templateUrl: "templates/questions/viewQuestion.html",
+                            controller: "viewQuestionCtrl"
+                        })
                         .state("add", {
                             parent: "questions",
                             url: "/add",

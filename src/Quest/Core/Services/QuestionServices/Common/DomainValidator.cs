@@ -54,9 +54,9 @@ namespace Services.QuestionServices.Common
             questionDocument.Categories.ForEach(category =>
             {
                 question.Categorize(category.Value, category.Code, trackingGuid);
-                if (category.SubCatgories != null && category.SubCatgories.Any())
+                if (category.SubCategories != null && category.SubCategories.Any())
                 {
-                    category.SubCatgories.ForEach(subCategory =>
+                    category.SubCategories.ForEach(subCategory =>
                     {
                         question.SubCategorize(category.Code, subCategory.Value, subCategory.Code, trackingGuid);
                     });

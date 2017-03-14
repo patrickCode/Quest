@@ -14,6 +14,19 @@
             return deferred.promise;
         }
 
+        var getQuestionById = function (id) {
+            var url = urlConfig.getQuestionById(id);
+            var deferred = $q.defer();
+
+            proxy.get(url)
+                .then(function (response) {
+                    deferred.resolve(response.data);
+                }, function (error) {
+                    deferred.reject(error)
+                });
+            return deferred.promise;
+        }
+
         var getQuestionByValue = function (question) {
             var url = urlConfig.getQuestionByValue(encodeURIComponent(question));
             var deferred = $q.defer();
@@ -52,6 +65,7 @@
         return {
             getUserQuestions: getUserQuestions,
             getQuestionByValue: getQuestionByValue,
+            getQuestionById: getQuestionById,
             addQuestion: addQuestion
         }
     }
