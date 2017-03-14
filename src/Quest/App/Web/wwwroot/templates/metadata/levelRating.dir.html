@@ -1,0 +1,14 @@
+﻿<div class="rategroup">
+    <form class="rating">
+        <input type="radio" name="rating" value="400" ng-checked="currentRate == 400" />
+        <label for="star5" title="Expert" ng-click="click(400)">400</label>
+        <input type="radio" name="rating" value="300" ng-checked="currentRate == 300" />
+        <label for="star4" title="Experienced" ng-click="click(300)">300</label>
+        <input type="radio" name="rating" value="200" ng-checked="currentRate == 200" />
+        <label for="star3" title="Informed" ng-click="click(200)">200</label>
+        <input type="radio" name="rating" value="100" ng-checked="currentRate == 100" />
+        <label for="star2" title="Introductory" ng-click="click(100)">100</label>
+        {{level}} {{currentRate}}
+    </form>
+    <br>
+</div>

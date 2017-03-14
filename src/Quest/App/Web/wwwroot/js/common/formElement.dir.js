@@ -1,6 +1,6 @@
 ﻿(function (module) {
     var setupDom = function (element) {
-        var inputElement = element.querySelector("input, textarea, select");
+        var inputElement = element.querySelector("input, textarea, select, level-rating");
         if (inputElement === null)
             return;
         var inputType = inputElement.getAttribute("type");

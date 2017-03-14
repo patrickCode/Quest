@@ -1,1 +1,8 @@
-﻿<button class="btn" ng-class="levelClass" style="padding-top:0px; padding-bottom:0px;">{{index}}</button>
+﻿<button class="btn" ng-class='requiredLevel.levelClass' style="padding-top:0px; padding-bottom:0px;" title="{{requiredLevel.description}}">
+    <span ng-show="showIndex">
+        {{requiredLevel.levelIndex}} -
+    </span>
+    <span>
+        {{requiredLevel.name}}
+    </span>
+</button>

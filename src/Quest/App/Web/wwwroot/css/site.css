@@ -59,3 +59,45 @@ textarea {
 .has-success {
     border: 1px #00ff90 solid;
 }
+
+.rategroup .rating {
+  float: left;
+}
+
+.rategroup .rating:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+  clip: rect(0, 0, 0, 0);
+}
+
+.rategroup .rating:not(:checked) > label {
+  float: right;
+  width: 1em;
+  padding: 0 .1em;
+  overflow: hidden;
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+.rategroup .rating > input:checked ~ label {
+  color: blue;
+}
+
+.rategroup .rating:not(:checked) > label:hover,
+.rategroup .rating:not(:checked) > label:hover ~ label {
+  color: gold;
+}
+
+.rategroup .rating > input:checked + label:hover,
+.rategroup .rating > input:checked + label:hover ~ label,
+.rategroup .rating > input:checked ~ label:hover,
+.rategroup .rating > input:checked ~ label:hover ~ label,
+.rategroup .rating > label:hover ~ input:checked ~ label {
+  color: blue;
+}
+
+.rating > label:active {
+  position: relative;
+  top: 2px;
+  left: 2px;
+}

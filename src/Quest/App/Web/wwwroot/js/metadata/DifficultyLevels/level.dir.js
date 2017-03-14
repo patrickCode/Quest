@@ -1,29 +1,16 @@
 ﻿(function (module) {
 
-    var levelDirective = function () {
+    var levelDirective = function (difficultyLevelsData) {
         return {
             restrict: "A/E",
             templateUrl: "templates/metadata/level.dir.html",
             scope: {
                 index: "=",
+                onlyTitle: "@"
             },
             link: function (scope) {
-
-                var getLevelClass = function () {
-                    switch (scope.index) {
-                        case 100: return "btn-info";
-                        case 200: return "btn-warning";
-                        case 300: return "btn-primary";
-                        case 400: return "btn-danger";
-                        default: return undefined;
-                    }
-                }
-
-                var levelClass = getLevelClass();
-                if (levelClass === undefined)
-                    index = "Undefined Level";
-                else
-                    scope.levelClass = levelClass;
+                scope.showIndex = scope.onlyTitle === "false";
+                scope.requiredLevel = difficultyLevelsData.getDifficultyLevelByIndex(scope.index);
             }
         }
     }
