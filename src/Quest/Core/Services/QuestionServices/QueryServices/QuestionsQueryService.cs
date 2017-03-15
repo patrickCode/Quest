@@ -75,5 +75,15 @@ namespace Services.QuestionServices.QueryServices
         {
             return await GetAsync(question => question.CreatedBy.Equals(userAlias));
         }
+
+        public List<QuestionDto> GetPublicQuestions()
+        {
+            return Get(question => question.IsPrivate == false);
+        }
+
+        public async Task<List<QuestionDto>> GetPublicQuestionsAsync()
+        {
+            return await GetAsync(question => question.IsPrivate == false);
+        }
     }
 }

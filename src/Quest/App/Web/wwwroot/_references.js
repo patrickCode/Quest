@@ -21,6 +21,7 @@
 /// <reference path="js/questions/confirmquestiondeletion.modal.js" />
 /// <reference path="js/questions/dupquestion.dir.js" />
 /// <reference path="js/questions/duptag.dir.js" />
+/// <reference path="js/questions/publicquestions.ctrl.js" />
 /// <reference path="js/questions/questions.data.js" />
 /// <reference path="js/questions/questionscategory.filter.js" />
 /// <reference path="js/questions/showquestion.ctrl.js" />

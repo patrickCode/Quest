@@ -24,8 +24,10 @@ namespace Web.API
         }
 
         [HttpGet]
-        public async Task<IList<QuestionDto>> Get()
+        public async Task<IList<QuestionDto>> Get(bool publicVisibility = true)
         {
+            if (publicVisibility)
+                return await _questionsQueryService.GetPublicQuestionsAsync();
             return await _questionsQueryService.GetAsync();
         }
 

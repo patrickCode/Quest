@@ -17,6 +17,7 @@
         var getQuestionByValue = function (value) {
             return baseUrl + (getQuestionByValueUrl.replace("{value}", value));
         }
+        var getPublicQuestionsUrl = baseUrl + "questions?publicVisibility=true";
 
         //Metadata
         var getAllCategoriesUrl = baseUrl + "categories";
@@ -28,6 +29,7 @@
         return {
             questionsByUserId: questionsByUserId,
             addNewQuestion: addNewQuestionUrl,
+            getPublicQuestions: getPublicQuestionsUrl,
             getQuestionByValue: getQuestionByValue,
             getQuestionById: getQuestionById,
             editQuestion: addNewQuestionUrl,

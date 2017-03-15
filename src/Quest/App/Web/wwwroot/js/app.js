@@ -9,7 +9,8 @@ angular.module("quest", ["ui.router", "ngMessages", "ui.bootstrap", "ui.toggle",
         function ($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider, categoriesData, questionTypesData, answerTypesData, difficultyLevelsData) {
 
             $urlRouterProvider
-                .otherwise("/shell/dashboard");
+                .when("/shell/questions", "/shell/questions/public")
+                .otherwise("/shell/questions/public");
 
             $stateProvider
                 .state("shell", {
@@ -41,6 +42,12 @@ angular.module("quest", ["ui.router", "ngMessages", "ui.bootstrap", "ui.toggle",
                         url: "/questions",
                         templateUrl: "templates/questions/questionsShell.html"
                     })
+                        .state("public", {
+                            parent: "questions",
+                            url: "/public",
+                            templateUrl: "templates/questions/publicQuestions.html",
+                            controller: "publicQuestionsCtrl"
+                        })
                         .state("view", {
                             parent: "questions",
                             url: "/{id}/view",

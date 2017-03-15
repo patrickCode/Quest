@@ -1,6 +1,6 @@
 ﻿(function (module) {
 
-    var dashboardCtrl = function ($scope, $location, questionsData, confirmQuestionDeletion, appInsightsLogger, categories) {
+    var publicQuestionsCtrl = function ($scope, $location, questionsData, appInsightsLogger) {
 
         $scope.userId = "pratikb@microsoft.com";
         $scope.questions = [];
@@ -15,11 +15,11 @@
 
         $scope.pagination = {
             currentPage: 1,
-            pageSize: 10
+            pageSize: 20
         };
 
         $scope.totalCount = 0;
-        $scope.paneltitle = "My Questions";
+        $scope.paneltitle = "";
 
         var changeOrder = function (orderOn) {
             if ($scope.orderOn === orderOn) {
@@ -80,7 +80,7 @@
         }
 
         var init = function () {
-            appInsightsLogger.logView("Dashboard", "/dashboard");
+            appInsightsLogger.logView("Public Questions", "/questions/public");
 
             $scope.getUserQuestions = getUserQuestions;
             $scope.changeOrder = changeOrder;
@@ -90,8 +90,9 @@
             $scope.deleteQuestion = deleteQuestion;
         }
         init();
+
     }
 
-    module.controller("dashboardCtrl", dashboardCtrl);
+    module.controller("publicQuestionsCtrl", publicQuestionsCtrl);
 
-}(angular.module("dashboard")))
+}(angular.module("question")))
