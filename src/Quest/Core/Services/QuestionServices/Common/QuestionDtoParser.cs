@@ -23,7 +23,7 @@ namespace Services.QuestionServices.Common
                 MediaUrl = question.MediaClipUri != null ? question.MediaClipUri.ToString() : string.Empty,
                 Options = question.AnswerOptions != null ? question.AnswerOptions.Select(option => option.Value).ToList() : null,
                 QuestionTypeCode = question.QuestionType.Code,
-                Tags = string.IsNullOrEmpty(question.Tags) ? null : question.Tags.Split(',').ToList(),
+                Tags = string.IsNullOrEmpty(question.Tags) ? new List<string>() : question.Tags.Split(',').ToList(),
                 Value = question.Value,
                 IsPrivate = question.IsPrivate
             };

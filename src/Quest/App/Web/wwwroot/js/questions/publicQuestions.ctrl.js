@@ -34,7 +34,7 @@
         var getUserQuestions = function () {
             $scope.questionsLoading = true;
             $scope.errorOcurredWhileLoadingQuestions = false;
-            questionsData.getUserQuestions($scope.userId)
+            questionsData.getPublicQuestions()
                 .then(function (data) {
                     $scope.totalCount = data.length;
                     $scope.questions = data;

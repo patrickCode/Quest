@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Common.Domain.CommandResults;
+using Microsoft.AspNetCore.Authorization;
 using Services.QuestionServices.Commands;
 using Services.QuestionServices.QueryServices;
 
@@ -30,7 +31,7 @@ namespace Web.API
                 return await _questionsQueryService.GetPublicQuestionsAsync();
             return await _questionsQueryService.GetAsync();
         }
-
+        
         [HttpGet]
         [Route("{identifier}")]
         public async Task<QuestionDto> Get(string identifier, string type = "identifier")
@@ -40,6 +41,7 @@ namespace Web.API
             return await _questionsQueryService.GetAsync(identifier);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("/api/categories/{category}/questions")]
         public async Task<IList<QuestionDto>> GetByCategory(string category)
@@ -47,6 +49,7 @@ namespace Web.API
             return await _questionsQueryService.GetByCategoryAsync(category);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("/api/users/{upn}/questions")]
         public async Task<IList<QuestionDto>> GetByUser(string upn)
@@ -54,6 +57,7 @@ namespace Web.API
             return await _questionsQueryService.GetByUserAsync(upn);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<HttpResponseMessage> UpdateQuestion([FromBody]QuestionDto question)
         {
@@ -65,6 +69,7 @@ namespace Web.API
             };
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<HttpResponseMessage> CreateQuestion([FromBody]QuestionDto question)
         {
@@ -76,6 +81,7 @@ namespace Web.API
             };
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("{id}")]
         public async Task<HttpResponseMessage> DeleteQuestion(string id)

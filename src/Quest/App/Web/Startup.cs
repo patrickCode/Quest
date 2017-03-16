@@ -58,6 +58,13 @@ namespace Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            {
+                AutomaticChallenge = true,
+                Authority = string.Format(Configuration.GetSection("Azure").GetSection("ActiveDirectory")["AadInstance"], Configuration.GetSection("Azure").GetSection("ActiveDirectory")["Tenant"]),
+                Audience = Configuration.GetSection("Azure").GetSection("ActiveDirectory")["Audience"]
+            });
+
             app.UseStaticFiles();
 
             app.UseMvc(routes =>

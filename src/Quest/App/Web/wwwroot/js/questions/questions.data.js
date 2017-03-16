@@ -1,8 +1,8 @@
 ﻿(function (module) {
 
-    var questionData = function ($q, urlConfig, proxy) {
-        var getUserQuestions = function (userId) {
-            var url = urlConfig.questionsByUserId(userId);
+    var questionData = function ($q, urlConfig, proxy, adalAuthenticationService) {
+        var getUserQuestions = function () {
+            var url = urlConfig.questionsByUserId(adalAuthenticationService.userInfo.userName);
             var deferred = $q.defer();
 
             proxy.get(url)
@@ -58,8 +58,8 @@
             var deferred = $q.defer();
 
             //Audit
-            question.createdBy = "pratikb@microsoft.com";
-            question.lastModifiedBy = "pratikb@microsoft.com";
+            question.createdBy = adalAuthenticationService.userInfo.userName;
+            question.lastModifiedBy = adalAuthenticationService.userInfo.userName;
             var today = new Date();
             question.createdOn = today;
             question.lastModifedOn = today;
@@ -78,7 +78,7 @@
             var deferred = $q.defer();
 
             //Audit
-            question.lastModifiedBy = "pratikb@microsoft.com";
+            question.lastModifiedBy = adalAuthenticationService.userInfo.userName;
             var today = new Date();
             question.lastModifedOn = today;
 

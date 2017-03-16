@@ -4,13 +4,14 @@ using Common.Model;
 using Common.Exceptions;
 using Domain.Questions.Aggregate;
 using Domain.Questions.ValueObject;
+using System.Collections.Generic;
 
 namespace Services.QuestionServices.Common
 {
     public class DomainValidator
     {
         public Question FromDto(QuestionDto questionDocument, Guid trackingGuid)
-        {   
+        {
             var question = new Question();
 
             //Set Question
@@ -38,7 +39,7 @@ namespace Services.QuestionServices.Common
             }
 
             //Add Tags
-            question.AddTags(questionDocument.Tags.ToArray());
+            question.AddTags(questionDocument.Tags != null ? questionDocument.Tags.ToArray() : new string[] { });
 
             //Difficulty Level
             var difficultLevel = Level.Get(questionDocument.DifficultLevel);
